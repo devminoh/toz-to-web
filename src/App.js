@@ -1,33 +1,37 @@
 import * as style from './styles/mainStyle';
-import ausopenLogo from './images/usopen-logo.png';
+import ausopenLogo from './image/ausopen-logo.svg'
+import usopenLogo from './image/usopen-logo.svg';
 import GlobalStyles from "./styles/globalStyles";
-// import menu from '../public/images/ic-menu.png'
+import menu from './image/ic-menu.png'
+import ball from './image/ball.svg'
 
 function App() {
-  const logoUrl = ausopenLogo;
+  // const logoUrl = ausopenLogo;
   const theme = ['aus', 'us', 'wimbledon', 'roland'];
 
   return (
     <style.AppContainer theme="us">
       <GlobalStyles />
       <style.MainContainer>
-        <style.LogoImg src={logoUrl} alt="logo" />
+        <style.LogoImg src={ausopenLogo} alt="logo" />
         <style.Cal></style.Cal>
         <style.ButtonContainer>
-          <style.ACButton>
+          <style.ACButton path={ball}>
             <span>AC</span>
           </style.ACButton>
-          <style.Button>+/-</style.Button>
+          <style.CalButton value="+/-">+/-</style.CalButton>
           <style.CalButton value="%">%</style.CalButton>
           <style.CalButton value="del">del</style.CalButton>
-          <style.Button>
-            <image src="/images/ic-menu.png" alt="menu"></image>
+          <style.Button className="menu">
+            <span>
+              <img src={menu} alt="menu" />
+            </span>
           </style.Button>
           <style.Button value={7}>7</style.Button>
           <style.Button value={8}>8</style.Button>
           <style.Button value={9}>9</style.Button>
           <style.CalButton value="/">/</style.CalButton>
-          <style.CalButton>=</style.CalButton>
+          <style.CalButton className="cal">=</style.CalButton>
           <style.Button value={4}>4</style.Button>
           <style.Button value={5}>5</style.Button>
           <style.Button value={6}>6</style.Button>

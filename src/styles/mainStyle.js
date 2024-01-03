@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-// import ball from '../../public/images/ball.png'
 import NotoSansBold from '../fonts/NotoSansKR-Bold.woff'
 
 export const AppContainer = styled.div`
@@ -9,15 +8,6 @@ export const AppContainer = styled.div`
   align-items: center;
   height: 100vh;
   background: rgba(127, 188, 233, 1);
-  ${props=> {
-    return (props.theme = "aus"
-      ? "background-color: rgba(127, 188, 233, 1)"
-      : (props.theme = "us"
-          ? "background-color: rgba(162, 208, 162, 1)"
-          : (props.theme = "wimbledon"
-              ? "background-color: rgba(117, 63, 189, 1)"
-              : "background-color: rgba(232, 105, 56, 1)")));
-  }}
 ;
 `;
 
@@ -73,10 +63,10 @@ export const MainContainer = styled.div`
   z-index: 1;
 `;
 
-export const LogoImg = styled.image`
-  height: 55px;
-  width: 55px;
-  border: 1px solid black;
+export const LogoImg = styled.img`
+  height: 35px;
+  /* width: 55px; */
+  /* border: 1px solid black; */
 `
 
 export const Cal = styled.div`
@@ -107,8 +97,8 @@ export const Button = styled.button`
   background-color: #ffffff;
 
   @font-face {
-    font-family: "Noto Sans";
-    src: local("Noto Sans") url(${NotoSansBold}) format("woff");
+    font-family: 'Noto Sans';
+    src: local('Noto Sans') url(${NotoSansBold}) format('woff');
   }
   font-size: 25px;
   font-weight: 700;
@@ -128,12 +118,55 @@ export const Button = styled.button`
     border-bottom-left-radius: 29px;
     border-bottom-right-radius: 29px;
   }
+
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &.menu {
+    background-color: rgba(255, 207, 207, 1);
+  }
 `;
 
-export const ACButton = styled(Button)`
-  background-image: url("public/images/ball.png");
+export const ACButton = styled.div`
+  display: flex;
+  justify-content: center;
+  @font-face {
+    font-family: 'Noto Sans';
+    src: local('Noto Sans') url(${NotoSansBold}) format('woff');
+  }
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 29px;
+  letter-spacing: 0.05em;
+  text-align: center;
+  font-family: Noto Sans;
+  -webkit-text-stroke: 1.5px #000000;
+  color: #ffffff;
+  
+  width: 58px;
+  height: 58px;
+  border: 1.5px solid rgba(0, 0, 0, 1);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 4px 6px 8px 0px rgba(0, 0, 0, 0.16);
+  background-image: url(${props=>props.path});
+
+  span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
-export const CalButton = styled(Button)``;
+export const CalButton = styled(Button)`
+  background-color: rgba(225, 255, 154, 1);
+
+  &.cal {
+    background-color: rgba(25, 145, 208, 1);
+  }
+`;
 export const ZeroButton = styled(Button)``;
 
 
