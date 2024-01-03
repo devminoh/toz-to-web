@@ -100,7 +100,7 @@ export const Button = styled.button`
     font-family: 'Noto Sans';
     src: local('Noto Sans') url(${NotoSansBold}) format('woff');
   }
-  font-size: 25px;
+  font-size: 33px;
   font-weight: 700;
   line-height: 29px;
   letter-spacing: 0.05em;
@@ -128,31 +128,39 @@ export const Button = styled.button`
   &.menu {
     background-color: rgba(255, 207, 207, 1);
   }
+
+  &.one {
+    background: url(${props => props?.path}) no-repeat;
+    background-size: cover;
+    border: none;
+    border-radius: 0%;
+    box-shadow: none;
+    justify-content: center;
+    display: flex;
+
+    span {
+      font-size: 20px;
+      padding: 4px;
+    }
+  }
+
+  &.nine {
+    position: relative;
+  }
+
+  &.doubleZero {
+    position: relative;
+  }
 `;
 
-export const ACButton = styled.div`
-  display: flex;
-  justify-content: center;
-  @font-face {
-    font-family: 'Noto Sans';
-    src: local('Noto Sans') url(${NotoSansBold}) format('woff');
-  }
-  font-size: 25px;
-  font-weight: 700;
-  line-height: 29px;
-  letter-spacing: 0.05em;
-  text-align: center;
-  font-family: Noto Sans;
-  -webkit-text-stroke: 1.5px #000000;
-  color: #ffffff;
-  
-  width: 58px;
-  height: 58px;
-  border: 1.5px solid rgba(0, 0, 0, 1);
-  border-radius: 50%;
-  cursor: pointer;
-  box-shadow: 4px 6px 8px 0px rgba(0, 0, 0, 0.16);
-  background-image: url(${props=>props.path});
+export const ACButton = styled(Button)`
+  background: url(${props => props?.path}) no-repeat;
+  background-size: 135%;
+  background-position: center;
+  border: none;
+  /* border-radius: 0; */
+  /* box-shadow: none; */
+  /* padding: -30px; */
 
   span {
     display: flex;
@@ -162,12 +170,37 @@ export const ACButton = styled.div`
 `;
 export const CalButton = styled(Button)`
   background-color: rgba(225, 255, 154, 1);
+  span {
+    font-size: 35px;
+  }
 
   &.cal {
     background-color: rgba(25, 145, 208, 1);
   }
 `;
 export const ZeroButton = styled(Button)``;
+export const NineButton = styled(Button)`
+  position: absolute;
+  background: url(${props => props?.path}) no-repeat;
+  background-size: 100%;
+  left: -12px;
+  top: -17px;
+  width: 74px;
+  border: none;
+  box-shadow: none;
+`;
+
+export const DoubleZeroButton = styled(Button)`
+  position: absolute;
+  background: url(${props => props?.path}) no-repeat;
+  background-size: 94%;
+  left: 0px;
+  top: 2px;
+  width: 61px;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+`;
 
 
 
