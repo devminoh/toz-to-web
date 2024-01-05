@@ -6,7 +6,8 @@ import rol from '../image/logo/rolandgarros-logo.svg';
 import us from '../image/logo/usopen-logo.svg';
 import wim from '../image/logo/wimbledon-logo.svg';
 
-const CustomModal = ({ modalOpen, setModalOpen }) => {
+const CustomModal = ({ modalOpen, setModalOpen, setTheme }) => {
+  
   return (
     <Modal
       isOpen={modalOpen}
@@ -17,10 +18,30 @@ const CustomModal = ({ modalOpen, setModalOpen }) => {
       shouldCloseOnOverlayClick={false}
     >
       <style.Title>테마선택</style.Title>
-      <style.Theme src={aus}></style.Theme>
-      <style.Theme src={rol}></style.Theme>
-      <style.Theme src={wim}></style.Theme>
-      <style.Theme src={us}></style.Theme>
+      <style.Theme
+        src={aus}
+        onClick={() => {
+          setTheme('aus');
+        }}
+      ></style.Theme>
+      <style.Theme
+        src={rol}
+        onClick={() => {
+          setTheme('roland');
+        }}
+      ></style.Theme>
+      <style.Theme
+        src={wim}
+        onClick={() => {
+          setTheme('wimbledon');
+        }}
+      ></style.Theme>
+      <style.Theme
+        src={us}
+        onClick={() => {
+          setTheme('us');
+        }}
+      ></style.Theme>
     </Modal>
   );
 };

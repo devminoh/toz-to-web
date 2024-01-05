@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
 import NotoSansBold from '../fonts/NotoSansKR-Bold.woff';
 
+const rgba = (r, g, b, a) => `rgba(${r}, ${g}, ${b}, ${a})`;
 export const Screen = styled.div`
   width: 330px;
   height: 137px;
@@ -9,12 +10,20 @@ export const Screen = styled.div`
   margin: 20px 0;
   box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25) inset;
   filter: drop-shadow(2px 2px 1px 0px rgba(255, 255, 255, 0.3));
-  background: rgba(127, 188, 233, 1);
   display: flex;
   flex-direction: column;
   justify-content: end;
   align-items: end;
   padding: 0 10px;
+
+  background-color: ${props =>
+    props.colorTheme === 'aus'
+      ? rgba(127, 188, 233, 1)
+      : props.colorTheme === 'us'
+        ? rgba(134, 167, 228, 1)
+        : props.colorTheme === 'wimbledon'
+          ? rgba(117, 63, 189, 1)
+          : rgba(232, 105, 56, 1)};
 `;
 
 export const Number = styled.h1`
@@ -57,7 +66,14 @@ export const Now = styled.div`
     background-color: rgba(255, 255, 255, 0.16);
   }
   &::-webkit-scrollbar-thumb {
-    background: rgba(127, 188, 233, 1);
+    background-color: ${props =>
+      props.colorTheme === 'aus'
+        ? rgba(127, 188, 233, 1)
+        : props.colorTheme === 'us'
+          ? rgba(134, 167, 228, 1)
+          : props.colorTheme === 'wimbledon'
+            ? rgba(117, 63, 189, 1)
+            : rgba(232, 105, 56, 1)};
     border-radius: 20px;
   }
 

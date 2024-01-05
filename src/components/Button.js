@@ -1,12 +1,27 @@
 import React, { useState } from 'react';
 import * as style from '../styles/mainStyle';
-import menu from '../image/ic-menu.png';
-import ball from '../image/ball.svg';
-import ausCap from '../image/cap/ausopen-cap.svg';
-import ausTrophy from '../image/Trophy/ausTrophy.svg';
-import ausBand from '../image/band/ausopen-band.svg';
-import del from '../image/del.svg'
 import CustomModal from './Modal';
+
+//이미지
+import menu from '../image/ic-menu.png';
+import del from '../image/del.svg'
+import ball from '../image/ball.svg';
+
+import ausCap from '../image/cap/ausCap.svg';
+import ausTrophy from '../image/Trophy/ausTrophy.svg';
+import ausBand from '../image/band/ausBand.svg';
+
+import usCap from '../image/cap/usCap.svg';
+import usTrophy from '../image/Trophy/usTrophy.svg';
+import usBand from '../image/band/usBand.svg';
+
+import rolCap from '../image/cap/rolCap.svg';
+import rolTrophy from '../image/Trophy/rolTrophy.svg';
+import rolBand from '../image/band/rolBand.svg';
+
+import wimCap from '../image/cap/wimCap.svg';
+import wimTrophy from '../image/Trophy/wimTrophy.svg';
+import wimBand from '../image/band/wimBand.svg';
 
 const Button = ({
   calc,
@@ -17,6 +32,8 @@ const Button = ({
   setPrevCalc,
   screen,
   setScreen,
+  theme,
+  setTheme,
 }) => {
   const number = ['0', '00', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   const oper = ['÷', 'x', '+', '-'];
@@ -83,15 +100,13 @@ const Button = ({
           setCalc(String(parseFloat(calc) / 100));
           break;
         case 'delete':
-          const str = String(calc).slice(0,-1);
-          setCalc((prev)=> str);
-          setScreen(String(screen).slice(0,-1));
+          const str = String(calc).slice(0, -1);
+          setCalc(prev => str);
+          setScreen(String(screen).slice(0, -1));
           break;
         case 'dot':
-          calc.includes('.') ? 
-            setCalc(calc) : 
-            setCalc(calc + '.') 
-            setScreen(prev => prev + '.');
+          calc.includes('.') ? setCalc(calc) : setCalc(calc + '.');
+          setScreen(prev => prev + '.');
           break;
         case 'equal':
           setCalc(String(calculator(operation, prevCalc, calc)));
@@ -100,32 +115,63 @@ const Button = ({
     }
   };
 
-  //모달
+  //테마모달
   const [modalOpen, setModalOpen] = useState(false);
   const clickModal = () => {
     setModalOpen(!modalOpen);
-  }
+  };
+  console.log(theme);
+  const cap =
+    theme === 'aus' ? ausCap : theme === 'us' ? usCap : theme === 'wimbledon' ? wimCap : rolCap;
+  const band =
+    theme === 'aus'
+      ? ausBand
+      : theme === 'us'
+        ? usBand
+        : theme === 'wimbledon'
+          ? wimBand
+          : rolBand;
+  const Trophy =
+    theme === 'aus'
+      ? ausTrophy
+      : theme === 'us'
+        ? usTrophy
+        : theme === 'wimbledon'
+          ? wimTrophy
+          : rolTrophy;
+
   return (
     <style.ButtonContainer>
       <style.ACButton onClick={clickBtn} path={ball} value="AC">
         AC
       </style.ACButton>
-      <style.CalButton onClick={clickBtn} value="plusminus">
+      <style.CalButton onClick={clickBtn} colorTheme={theme} value="plusminus">
         +/-
       </style.CalButton>
-      <style.CalButton onClick={clickBtn} value="percent">
+      <style.CalButton onClick={clickBtn} colorTheme={theme} value="percent">
         %
       </style.CalButton>
-      <style.CalButton onClick={clickBtn} value="delete">
+      <style.CalButton onClick={clickBtn} colorTheme={theme} value="delete">
         <span>
           <img src={del} alt="delete" />
         </span>
       </style.CalButton>
-      <style.Button onClick={clickModal} className="theme" value="theme">
+      <style.Button
+        onClick={clickModal}
+        className="theme"
+        value="theme"
+        colorTheme={theme}
+      >
         <span onClick={clickModal} value="theme">
           <img onClick={clickModal} value="theme" src={menu} alt="theme" />
         </span>
-        {modalOpen ? <CustomModal modalOpen={modalOpen} setModalOpen={setModalOpen} /> : null}
+        {modalOpen ? (
+          <CustomModal
+            modalOpen={modalOpen}
+            setModalOpen={setModalOpen}
+            setTheme={setTheme}
+          />
+        ) : null}
         {/* <CustomModal modalOpen={modalOpen} setModalOpen={setModalOpen} /> */}
       </style.Button>
       <style.Button onClick={clickBtn} value="7">
@@ -135,14 +181,19 @@ const Button = ({
         8
       </style.Button>
       <style.Button onClick={clickBtn} className="nine" value="9">
-        <style.NineButton path={ausCap} value="9"></style.NineButton>9
+        <style.NineButton path={cap} value="9"></style.NineButton>9
       </style.Button>
-      <style.CalButton onClick={clickBtn} value="÷">
+      <style.CalButton onClick={clickBtn} colorTheme={theme} value="÷">
         ÷
       </style.CalButton>
-      <style.CalButton onClick={clickBtn} className="equal" value="equal">
+      <style.EqualButton
+        onClick={clickBtn}
+        colorTheme={theme}
+        className="equal"
+        value="equal"
+      >
         =
-      </style.CalButton>
+      </style.EqualButton>
       <style.Button onClick={clickBtn} value="4">
         4
       </style.Button>
@@ -152,15 +203,10 @@ const Button = ({
       <style.Button onClick={clickBtn} value="6">
         6
       </style.Button>
-      <style.CalButton onClick={clickBtn} value="x">
+      <style.CalButton onClick={clickBtn} colorTheme={theme} value="x">
         x
       </style.CalButton>
-      <style.Button
-        onClick={clickBtn}
-        className="one"
-        path={ausTrophy}
-        value="1"
-      >
+      <style.Button onClick={clickBtn} className="one" path={Trophy} value="1">
         1
       </style.Button>
       <style.Button onClick={clickBtn} value="2">
@@ -169,23 +215,20 @@ const Button = ({
       <style.Button onClick={clickBtn} value="3">
         3
       </style.Button>
-      <style.CalButton onClick={clickBtn} value="-">
+      <style.CalButton onClick={clickBtn} colorTheme={theme} value="-">
         -
       </style.CalButton>
       <style.Button onClick={clickBtn} value="0">
         0
       </style.Button>
       <style.Button onClick={clickBtn} className="doubleZero" value="00">
-        <style.DoubleZeroButton
-          path={ausBand}
-          value="00"
-        ></style.DoubleZeroButton>
+        <style.DoubleZeroButton path={band} value="00"></style.DoubleZeroButton>
         00
       </style.Button>
       <style.Button onClick={clickBtn} value="dot">
         .
       </style.Button>
-      <style.CalButton onClick={clickBtn} value="+">
+      <style.CalButton onClick={clickBtn} colorTheme={theme} value="+">
         +
       </style.CalButton>
     </style.ButtonContainer>

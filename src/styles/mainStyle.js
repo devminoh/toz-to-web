@@ -1,14 +1,22 @@
 import styled from 'styled-components';
 import NotoSansBold from '../fonts/NotoSansKR-Bold.woff'
 
+const rgba = (r, g, b, a) => `rgba(${r}, ${g}, ${b}, ${a})`;
+
 export const AppContainer = styled.div`
   display: flex;
   position: relative;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  background: rgba(127, 188, 233, 1);
-;
+  background-color: ${props =>
+    props.colorTheme === 'aus'
+      ? rgba(127, 188, 233, 1)
+      : props.colorTheme === 'us'
+        ? rgba(134, 167, 228, 1)
+        : props.colorTheme === 'wimbledon'
+          ? rgba(117, 63, 189, 1)
+          : rgba(232, 105, 56, 1)};
 `;
 
 export const Line = styled.div`
@@ -59,7 +67,14 @@ export const MainContainer = styled.div`
   width: 340px;
   height: 573px;
   /* border: 1px solid red; */
-  background: rgba(127, 188, 233, 1);
+  background-color: ${props =>
+    props.colorTheme === 'aus'
+      ? rgba(127, 188, 233, 1)
+      : props.colorTheme === 'us'
+        ? rgba(134, 167, 228, 1)
+        : props.colorTheme === 'wimbledon'
+          ? rgba(117, 63, 189, 1)
+          : rgba(232, 105, 56, 1)};
   z-index: 1;
 `;
 
@@ -115,7 +130,14 @@ export const Button = styled.button`
   }
 
   &.theme {
-    background-color: rgba(255, 207, 207, 1);
+    background-color: ${props =>
+      props.colorTheme === 'aus'
+        ? rgba(255, 207, 207, 1)
+        : props.colorTheme === 'us'
+          ? rgba(255, 212, 0, 1)
+          : props.colorTheme === 'wimbledon'
+            ? rgba(114, 202, 169, 1)
+            : rgba(33, 150, 106, 1)};
   }
 
   &.one {
@@ -158,16 +180,36 @@ export const ACButton = styled(Button)`
     align-items: center;
   }
 `;
+
 export const CalButton = styled(Button)`
-  background-color: rgba(225, 255, 154, 1);
+  /* background-color: rgba(225, 255, 154, 1); */
+  background-color: ${props =>
+    props.colorTheme === 'aus'
+      ? rgba(225, 255, 154, 1)
+      : props.colorTheme === 'us'
+        ? rgba(255, 235, 136, 1)
+        : props.colorTheme === 'wimbledon'
+          ? rgba(255, 175, 102, 1)
+          : rgba(255, 181, 152, 1)};
   span {
     font-size: 35px;
   }
+`;
 
-  &.cal {
-    background-color: rgba(25, 145, 208, 1);
+export const EqualButton = styled(Button)`
+  background-color: ${props =>
+    props.colorTheme === 'aus'
+      ? rgba(25, 145, 208, 1)
+      : props.colorTheme === 'us'
+        ? rgba(0, 40, 140, 1)
+        : props.colorTheme === 'wimbledon'
+          ? rgba(0, 148, 79, 1)
+          : rgba(5, 72, 47, 1)};
+  span {
+    font-size: 35px;
   }
 `;
+
 export const NineButton = styled(Button)`
   position: absolute;
   background: url(${props => props?.path}) no-repeat;

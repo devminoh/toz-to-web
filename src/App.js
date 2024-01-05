@@ -12,7 +12,8 @@ import Button from './components/Button';
 
 function App() {
   // theme
-  const theme = ['aus', 'us', 'wimbledon', 'roland'];
+  const [theme, setTheme] = useState('aus');
+  // const theme = ['aus', 'us', 'wimbledon', 'roland'];
 
   //calc
   const [screen, setScreen] = useState('');
@@ -22,14 +23,11 @@ function App() {
   console.log('calc :', calc, 'prev :', prevCalc, 'op :', operation);
 
   return (
-    <style.AppContainer theme="us">
+    <style.AppContainer colorTheme={theme}>
       <GlobalStyles />
-      <style.MainContainer>
+      <style.MainContainer colorTheme={theme}>
         <style.LogoImg src={ausopenLogo} alt="logo" />
-        <Screen
-          calc={calc}
-          screen={screen}
-        />
+        <Screen calc={calc} screen={screen} theme={theme} />
         <Button
           calc={calc}
           setCalc={setCalc}
@@ -39,6 +37,8 @@ function App() {
           setPrevCalc={setPrevCalc}
           screen={screen}
           setScreen={setScreen}
+          theme={theme}
+          setTheme={setTheme}
         />
       </style.MainContainer>
       <style.Line className="firstLine" />
