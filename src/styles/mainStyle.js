@@ -69,17 +69,6 @@ export const LogoImg = styled.img`
   /* border: 1px solid black; */
 `
 
-export const Cal = styled.div`
-  width: 330px;
-  height: 137px;
-  border-radius: 24px;
-  border: 1.5px solid #000000;
-  margin: 20px 0;
-  box-shadow: 4px 4px 8px 0px rgba(0, 0, 0, 0.25) inset;
-  filter: drop-shadow(2px 2px 1px 0px rgba(255, 255, 255, 0.3));
-  // box-shadow: -2px -2px 2px 0px rgba(255, 255, 255, 0.14);
-`; 
-
 //buttons
 export const ButtonContainer = styled.div`
   display: grid;
@@ -125,7 +114,7 @@ export const Button = styled.button`
     align-items: center;
   }
 
-  &.menu {
+  &.theme {
     background-color: rgba(255, 207, 207, 1);
   }
 
@@ -137,11 +126,8 @@ export const Button = styled.button`
     box-shadow: none;
     justify-content: center;
     display: flex;
-
-    span {
-      font-size: 20px;
-      padding: 4px;
-    }
+    font-size: 20px;
+    padding: 4px;
   }
 
   &.nine {
@@ -151,6 +137,13 @@ export const Button = styled.button`
   &.doubleZero {
     position: relative;
   }
+
+  &:hover {
+    opacity: 70%;
+  }
+  &:active {
+    opacity: 70%;
+  }
 `;
 
 export const ACButton = styled(Button)`
@@ -158,9 +151,6 @@ export const ACButton = styled(Button)`
   background-size: 135%;
   background-position: center;
   border: none;
-  /* border-radius: 0; */
-  /* box-shadow: none; */
-  /* padding: -30px; */
 
   span {
     display: flex;
@@ -178,7 +168,6 @@ export const CalButton = styled(Button)`
     background-color: rgba(25, 145, 208, 1);
   }
 `;
-export const ZeroButton = styled(Button)``;
 export const NineButton = styled(Button)`
   position: absolute;
   background: url(${props => props?.path}) no-repeat;
@@ -188,6 +177,11 @@ export const NineButton = styled(Button)`
   width: 74px;
   border: none;
   box-shadow: none;
+
+  &:active {
+    top: -30px;
+    transition: 0.2s;
+  }
 `;
 
 export const DoubleZeroButton = styled(Button)`
