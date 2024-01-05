@@ -6,6 +6,7 @@ import ausCap from '../image/cap/ausopen-cap.svg';
 import ausTrophy from '../image/Trophy/ausTrophy.svg';
 import ausBand from '../image/band/ausopen-band.svg';
 import del from '../image/del.svg'
+import CustomModal from './Modal';
 
 const Button = ({
   calc,
@@ -19,7 +20,7 @@ const Button = ({
 }) => {
   const number = ['0', '00', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   const oper = ['÷', 'x', '+', '-'];
-  
+
   const calculator = (operation, prevCalc, calc) => {
     const nowSum = parseFloat(calc);
     if (operation === '+') {
@@ -98,6 +99,12 @@ const Button = ({
       }
     }
   };
+
+  //모달
+  const [modalOpen, setModalOpen] = useState(false);
+  const clickModal = () => {
+    setModalOpen(!modalOpen);
+  }
   return (
     <style.ButtonContainer>
       <style.ACButton onClick={clickBtn} path={ball} value="AC">
@@ -114,10 +121,12 @@ const Button = ({
           <img src={del} alt="delete" />
         </span>
       </style.CalButton>
-      <style.Button onClick={clickBtn} className="theme" value="theme">
-        <span onClick={clickBtn} value="theme">
-          <img onClick={clickBtn} value="theme" src={menu} alt="theme" />
+      <style.Button onClick={clickModal} className="theme" value="theme">
+        <span onClick={clickModal} value="theme">
+          <img onClick={clickModal} value="theme" src={menu} alt="theme" />
         </span>
+        {modalOpen ? <CustomModal modalOpen={modalOpen} setModalOpen={setModalOpen} /> : null}
+        {/* <CustomModal modalOpen={modalOpen} setModalOpen={setModalOpen} /> */}
       </style.Button>
       <style.Button onClick={clickBtn} value="7">
         7
