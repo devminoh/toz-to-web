@@ -7,8 +7,8 @@ const Screen = ({ calc, screen, theme }) => {
     .replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ',');
 
   return (
-    <style.Screen colorTheme={theme}>
-      <style.Now len={screen.lenth} colorTheme={theme}>
+    <style.Screen colortheme={theme}>
+      <style.Now len={screen.lenth} colortheme={theme}>
         {screen}
       </style.Now>
       <style.Number>{calcNum}</style.Number>

@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled from 'styled-components';
 import NotoSansBold from '../fonts/NotoSansKR-Bold.woff';
 
 const rgba = (r, g, b, a) => `rgba(${r}, ${g}, ${b}, ${a})`;
@@ -17,11 +17,11 @@ export const Screen = styled.div`
   padding: 0 10px;
 
   background-color: ${props =>
-    props.colorTheme === 'aus'
+    props.colortheme === 'aus'
       ? rgba(127, 188, 233, 1)
-      : props.colorTheme === 'us'
+      : props.colortheme === 'us'
         ? rgba(134, 167, 228, 1)
-        : props.colorTheme === 'wimbledon'
+        : props.colortheme === 'wimbledon'
           ? rgba(117, 63, 189, 1)
           : rgba(232, 105, 56, 1)};
 `;
@@ -46,18 +46,18 @@ export const Now = styled.div`
     font-family: 'Noto Sans';
     src: local('Noto Sans') url(${NotoSansBold}) format('woff');
   }
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 700;
-  line-height: 29px;
+  /* line-height: 29px; */
   letter-spacing: 0.05em;
   text-align: center;
   font-family: Noto Sans;
   -webkit-text-stroke: 1.5px #000000;
   color: #ffffff;
   margin: 10px 0;
-  /* border: 1px solid red; */
   width: 310px;
-
+  display: flex;
+  justify-content: flex-end;
   word-break: break-all;
   overflow: auto;
 
@@ -67,20 +67,13 @@ export const Now = styled.div`
   }
   &::-webkit-scrollbar-thumb {
     background-color: ${props =>
-      props.colorTheme === 'aus'
+      props.colortheme === 'aus'
         ? rgba(127, 188, 233, 1)
-        : props.colorTheme === 'us'
+        : props.colortheme === 'us'
           ? rgba(134, 167, 228, 1)
-          : props.colorTheme === 'wimbledon'
+          : props.colortheme === 'wimbledon'
             ? rgba(117, 63, 189, 1)
             : rgba(232, 105, 56, 1)};
     border-radius: 20px;
   }
-
-  /* ${len => {
-    if (len.children.length >= 15) {
-    }
-    console.log(len);
-    console.log(len.children);
-  }} */
 `;

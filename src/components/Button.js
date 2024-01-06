@@ -94,6 +94,32 @@ const Button = ({
           setScreen('');
           break;
         case 'plusminus':
+          const lastNumberMatch = screen.match(/[+-]?\d+(\.\d+)?$/);
+
+          // match 함수의 결과가 null인 경우 처리
+          if (lastNumberMatch !== null) {
+            const lastNumber = lastNumberMatch[0]; // 현재 표시된 계산식에서 마지막 숫자 추출
+
+            const newLastNumber =
+              parseFloat(lastNumber) * -1 > 0
+                ? `+${parseFloat(lastNumber) * -1}`
+                : `(${parseFloat(lastNumber) * -1}`; // 부호 바꾸기
+
+            const newScreen = screen.replace(
+              /[+-]?\d+(\.\d+)?$/,
+              newLastNumber,
+            );
+
+            if (newScreen.match(/[-+*/]$/)) {
+              alert('올바르지 않은 계산식입니다.');
+              return;
+            } else {
+              setScreen(newScreen);
+            }
+          } else {
+            alert('올바른 숫자가 없습니다.');
+          }
+          
           setCalc(String(parseFloat(calc) * -1));
           break;
         case 'percent':
@@ -110,6 +136,7 @@ const Button = ({
           break;
         case 'equal':
           setCalc(String(calculator(operation, prevCalc, calc)));
+          setScreen('');
           break;
       }
     }
@@ -120,7 +147,7 @@ const Button = ({
   const clickModal = () => {
     setModalOpen(!modalOpen);
   };
-  console.log(theme);
+  
   const cap =
     theme === 'aus' ? ausCap : theme === 'us' ? usCap : theme === 'wimbledon' ? wimCap : rolCap;
   const band =
@@ -140,18 +167,26 @@ const Button = ({
           ? wimTrophy
           : rolTrophy;
 
+  const buttons = [
+    {'name': '+/-', 'value': 'plusminus'},
+    {'name': '%', 'value': 'percent'}
+  ]
+  
   return (
     <style.ButtonContainer>
       <style.ACButton onClick={clickBtn} path={ball} value="AC">
         AC
       </style.ACButton>
-      <style.CalButton onClick={clickBtn} colorTheme={theme} value="plusminus">
-        +/-
-      </style.CalButton>
-      <style.CalButton onClick={clickBtn} colorTheme={theme} value="percent">
-        %
-      </style.CalButton>
-      <style.CalButton onClick={clickBtn} colorTheme={theme} value="delete">
+      {buttons.map(el => (
+        <style.CalButton
+          onClick={clickBtn}
+          colortheme={theme}
+          value={el.value}
+        >
+          {el.name}
+        </style.CalButton>
+      ))}
+      <style.CalButton onClick={clickBtn} colortheme={theme} value="delete">
         <span>
           <img src={del} alt="delete" />
         </span>
@@ -160,7 +195,7 @@ const Button = ({
         onClick={clickModal}
         className="theme"
         value="theme"
-        colorTheme={theme}
+        colortheme={theme}
       >
         <span onClick={clickModal} value="theme">
           <img onClick={clickModal} value="theme" src={menu} alt="theme" />
@@ -170,6 +205,7 @@ const Button = ({
             modalOpen={modalOpen}
             setModalOpen={setModalOpen}
             setTheme={setTheme}
+            theme={theme}
           />
         ) : null}
         {/* <CustomModal modalOpen={modalOpen} setModalOpen={setModalOpen} /> */}
@@ -183,12 +219,12 @@ const Button = ({
       <style.Button onClick={clickBtn} className="nine" value="9">
         <style.NineButton path={cap} value="9"></style.NineButton>9
       </style.Button>
-      <style.CalButton onClick={clickBtn} colorTheme={theme} value="÷">
+      <style.CalButton onClick={clickBtn} colortheme={theme} value="÷">
         ÷
       </style.CalButton>
       <style.EqualButton
         onClick={clickBtn}
-        colorTheme={theme}
+        colortheme={theme}
         className="equal"
         value="equal"
       >
@@ -203,7 +239,7 @@ const Button = ({
       <style.Button onClick={clickBtn} value="6">
         6
       </style.Button>
-      <style.CalButton onClick={clickBtn} colorTheme={theme} value="x">
+      <style.CalButton onClick={clickBtn} colortheme={theme} value="x">
         x
       </style.CalButton>
       <style.Button onClick={clickBtn} className="one" path={Trophy} value="1">
@@ -215,7 +251,7 @@ const Button = ({
       <style.Button onClick={clickBtn} value="3">
         3
       </style.Button>
-      <style.CalButton onClick={clickBtn} colorTheme={theme} value="-">
+      <style.CalButton onClick={clickBtn} colortheme={theme} value="-">
         -
       </style.CalButton>
       <style.Button onClick={clickBtn} value="0">
@@ -228,7 +264,7 @@ const Button = ({
       <style.Button onClick={clickBtn} value="dot">
         .
       </style.Button>
-      <style.CalButton onClick={clickBtn} colorTheme={theme} value="+">
+      <style.CalButton onClick={clickBtn} colortheme={theme} value="+">
         +
       </style.CalButton>
     </style.ButtonContainer>

@@ -4,6 +4,9 @@ import * as style from './styles/mainStyle';
 //이미지
 import ausopenLogo from './image/logo/ausopen-logo.svg'
 import usopenLogo from './image/logo/usopen-logo.svg';
+import wimLogo from './image/logo/wimbledon-logo.svg';
+import rolLogo from './image/logo/rolandgarros-logo.svg';
+
 import GlobalStyles from "./styles/globalStyles";
 
 //component
@@ -14,19 +17,27 @@ function App() {
   // theme
   const [theme, setTheme] = useState('aus');
   // const theme = ['aus', 'us', 'wimbledon', 'roland'];
-
+  const logo =
+    theme === 'aus'
+      ? ausopenLogo
+      : theme === 'us'
+        ? usopenLogo
+        : theme === 'wimbledon'
+          ? wimLogo
+          : rolLogo;
   //calc
   const [screen, setScreen] = useState('');
   const [calc, setCalc] = useState('0');
   const [prevCalc, setPrevCalc] = useState(0);
   const [operation, setOperation] = useState('');
   console.log('calc :', calc, 'prev :', prevCalc, 'op :', operation);
+  console.log(screen);
 
   return (
-    <style.AppContainer colorTheme={theme}>
+    <style.AppContainer colortheme={theme}>
       <GlobalStyles />
-      <style.MainContainer colorTheme={theme}>
-        <style.LogoImg src={ausopenLogo} alt="logo" />
+      <style.MainContainer colortheme={theme}>
+        <style.LogoImg src={logo} alt="logo" />
         <Screen calc={calc} screen={screen} theme={theme} />
         <Button
           calc={calc}

@@ -34,6 +34,7 @@ export const Title = styled.h1`
   letter-spacing: 0em;
   text-align: left;
 `;
+
 export const Theme = styled.img`
   width: 70px;
   height: 70px;
@@ -44,7 +45,10 @@ export const Theme = styled.img`
   border-radius: 10px;
   cursor: pointer;
 
-  &:focus {
+  &:focus,
+  &:hover {
     border: 1.5px solid rgba(0, 0, 0, 1);
+    outline: none;
   }
+  ${({ isSelected }) => isSelected && 'border: 1.5px solid rgba(0, 0, 0, 1);'}
 `;

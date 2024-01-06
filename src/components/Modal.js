@@ -6,8 +6,8 @@ import rol from '../image/logo/rolandgarros-logo.svg';
 import us from '../image/logo/usopen-logo.svg';
 import wim from '../image/logo/wimbledon-logo.svg';
 
-const CustomModal = ({ modalOpen, setModalOpen, setTheme }) => {
-  
+const CustomModal = ({ modalOpen, setModalOpen, setTheme, theme }) => {
+
   return (
     <Modal
       isOpen={modalOpen}
