@@ -36,7 +36,7 @@ const Button = ({
   theme,
   setTheme,
 }) => {
-  
+  const [clear, setClear] = useState('AC');
   const clickBtn = (e)=> {
     clickCalc(e, {
       calc,
@@ -48,6 +48,7 @@ const Button = ({
       screen,
       setScreen,
       theme,
+      setClear,
     });
   }
 
@@ -84,7 +85,7 @@ const Button = ({
   return (
     <style.ButtonContainer>
       <style.ACButton onClick={clickBtn} path={ball} value="AC">
-        AC
+        {clear}
       </style.ACButton>
       {buttons.map(el => (
         <style.CalButton onClick={clickBtn} colortheme={theme} value={el.value}>

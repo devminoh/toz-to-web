@@ -30,7 +30,8 @@ import { Alert } from './alert';
       setPrevCalc,
       screen,
       setScreen,
-      theme
+      theme,
+      setClear,
     },
   ) => {
     const value = e.target.value || e.target.alt || e.target?.firstChild.alt;
@@ -39,6 +40,7 @@ import { Alert } from './alert';
     if (number.includes(value)) {
       setCalc(prev => (prev === '0' ? value : prev + value));
       setScreen(prev => prev + value);
+      setClear('C');
       return;
     } else if (oper.includes(value)) {
       setScreen(prev => prev + value);
@@ -66,25 +68,25 @@ import { Alert } from './alert';
         }
         setOperation(value);
       } else {
-      setPrevCalc(parseFloat(calc));
-      setCalc('0');
-      setOperation(value);
-      //   // 현재 연산자가 * 또는 / 이면서 이전 연산자가 + 또는 - 인 경우
-      //   if (['*', '/'].includes(value) && ['+', '-'].includes(operation)) {
-      //     // 이전 연산 결과에 현재까지의 계산을 적용
-      //     const result = calculator(operation, prevCalc, parseFloat(calc));
-      //     setPrevCalc(result);
-      //     setCalc('0');
-      //   } else {
-      //     // 그 외의 경우는 현재까지의 계산 결과를 이용하여 새로운 연산 시작
-      //     setPrevCalc(parseFloat(calc));
-      //     setCalc('0');
-      //   }
-      //   setOperation(value);
-      // } else {
-      //   setPrevCalc(parseFloat(calc));
-      //   setCalc('0');
-      //   setOperation(value);
+        setPrevCalc(parseFloat(calc));
+        setCalc('0');
+        setOperation(value);
+        //   // 현재 연산자가 * 또는 / 이면서 이전 연산자가 + 또는 - 인 경우
+        //   if (['*', '/'].includes(value) && ['+', '-'].includes(operation)) {
+        //     // 이전 연산 결과에 현재까지의 계산을 적용
+        //     const result = calculator(operation, prevCalc, parseFloat(calc));
+        //     setPrevCalc(result);
+        //     setCalc('0');
+        //   } else {
+        //     // 그 외의 경우는 현재까지의 계산 결과를 이용하여 새로운 연산 시작
+        //     setPrevCalc(parseFloat(calc));
+        //     setCalc('0');
+        //   }
+        //   setOperation(value);
+        // } else {
+        //   setPrevCalc(parseFloat(calc));
+        //   setCalc('0');
+        //   setOperation(value);
       }
     } else {
       switch (value) {
@@ -94,6 +96,7 @@ import { Alert } from './alert';
           setCalc('0');
           setPrevCalc(0);
           setScreen('');
+          setClear('AC');
           break;
         case 'plusminus':
           const lastNumberMatch = screen.match(/[+-]?\d+(\.\d+)?$/);
@@ -139,9 +142,7 @@ import { Alert } from './alert';
 
         case 'delete':
           const str = String(calc).slice(0, -1);
-          // setCalc(prev => str);
           setCalc(prev => (str === '' ? '0' : str));
-          // setScreen(String(screen).slice(0, -1));
           setScreen(prev => String(prev).slice(0, -1));
           break;
 
