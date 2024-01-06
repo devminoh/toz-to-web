@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import * as style from '../styles/mainStyle';
 import CustomModal from './Modal';
+import { clickCalc } from './calculator';
 
 //이미지
 import menu from '../image/ic-menu.png';
@@ -35,112 +36,20 @@ const Button = ({
   theme,
   setTheme,
 }) => {
-  const number = ['0', '00', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
-  const oper = ['÷', 'x', '+', '-'];
-
-  const calculator = (operation, prevCalc, calc) => {
-    const nowSum = parseFloat(calc);
-    if (operation === '+') {
-      return prevCalc + nowSum;
-    }
-    if (operation === '-') {
-      return prevCalc - nowSum;
-    }
-
-    if (operation === '÷') {
-      return prevCalc / nowSum;
-    }
-
-    if (operation === 'x') {
-      return prevCalc * nowSum;
-    }
-    return 0;
-  };
-
-  const clickBtn = e => {
-    const value = e.target.value || e.target.alt || e.target?.firstChild.alt;
-    console.log(value);
-
-    if (number.includes(value)) {
-      setCalc(calc => String(parseFloat(calc + value)));
-      setScreen(prev => prev + value);
-      return;
-    } else if (oper.includes(value)) {
-      setPrevCalc(() => parseFloat(calc));
-      setScreen(prev => prev + value);
-      setCalc('0');
-      switch (value) {
-        case '÷':
-          setOperation('÷');
-          break;
-        case 'x':
-          setOperation('x');
-          break;
-        case '+':
-          setOperation('+');
-          break;
-        case '-':
-          setOperation('-');
-          break;
-        default: // Do nothing
-      }
-    } else {
-      switch (value) {
-        default: //Do nothing;
-        case 'AC':
-          setOperation('');
-          setCalc('0');
-          setPrevCalc(0);
-          setScreen('');
-          break;
-        case 'plusminus':
-          const lastNumberMatch = screen.match(/[+-]?\d+(\.\d+)?$/);
-
-          // match 함수의 결과가 null인 경우 처리
-          if (lastNumberMatch !== null) {
-            const lastNumber = lastNumberMatch[0]; // 현재 표시된 계산식에서 마지막 숫자 추출
-
-            const newLastNumber =
-              parseFloat(lastNumber) * -1 > 0
-                ? `+${parseFloat(lastNumber) * -1}`
-                : `(${parseFloat(lastNumber) * -1}`; // 부호 바꾸기
-
-            const newScreen = screen.replace(
-              /[+-]?\d+(\.\d+)?$/,
-              newLastNumber,
-            );
-
-            if (newScreen.match(/[-+*/]$/)) {
-              alert('올바르지 않은 계산식입니다.');
-              return;
-            } else {
-              setScreen(newScreen);
-            }
-          } else {
-            alert('올바른 숫자가 없습니다.');
-          }
-          
-          setCalc(String(parseFloat(calc) * -1));
-          break;
-        case 'percent':
-          setCalc(String(parseFloat(calc) / 100));
-          break;
-        case 'delete':
-          const str = String(calc).slice(0, -1);
-          setCalc(prev => str);
-          setScreen(String(screen).slice(0, -1));
-          break;
-        case 'dot':
-          calc.includes('.') ? setCalc(calc) : setCalc(calc + '.');
-          setScreen(prev => prev + '.');
-          break;
-        case 'equal':
-          setCalc(String(calculator(operation, prevCalc, calc)));
-          setScreen('');
-          break;
-      }
-    }
-  };
+  
+  const clickBtn = (e)=> {
+    clickCalc(e, {
+      calc,
+      setCalc,
+      operation,
+      setOperation,
+      prevCalc,
+      setPrevCalc,
+      screen,
+      setScreen,
+      theme,
+    });
+  }
 
   //테마모달
   const [modalOpen, setModalOpen] = useState(false);
@@ -178,11 +87,7 @@ const Button = ({
         AC
       </style.ACButton>
       {buttons.map(el => (
-        <style.CalButton
-          onClick={clickBtn}
-          colortheme={theme}
-          value={el.value}
-        >
+        <style.CalButton onClick={clickBtn} colortheme={theme} value={el.value}>
           {el.name}
         </style.CalButton>
       ))}
@@ -210,12 +115,11 @@ const Button = ({
         ) : null}
         {/* <CustomModal modalOpen={modalOpen} setModalOpen={setModalOpen} /> */}
       </style.Button>
-      <style.Button onClick={clickBtn} value="7">
-        7
-      </style.Button>
-      <style.Button onClick={clickBtn} value="8">
-        8
-      </style.Button>
+      {[7, 8].map(el => (
+        <style.Button onClick={clickBtn} value={el}>
+          {el}
+        </style.Button>
+      ))}
       <style.Button onClick={clickBtn} className="nine" value="9">
         <style.NineButton path={cap} value="9"></style.NineButton>9
       </style.Button>
@@ -230,33 +134,28 @@ const Button = ({
       >
         =
       </style.EqualButton>
-      <style.Button onClick={clickBtn} value="4">
-        4
-      </style.Button>
-      <style.Button onClick={clickBtn} value="5">
-        5
-      </style.Button>
-      <style.Button onClick={clickBtn} value="6">
-        6
-      </style.Button>
+      {[4, 5, 6].map(el => (
+        <style.Button onClick={clickBtn} value={el}>
+          {el}
+        </style.Button>
+      ))}
       <style.CalButton onClick={clickBtn} colortheme={theme} value="x">
         x
       </style.CalButton>
       <style.Button onClick={clickBtn} className="one" path={Trophy} value="1">
         1
       </style.Button>
-      <style.Button onClick={clickBtn} value="2">
-        2
-      </style.Button>
-      <style.Button onClick={clickBtn} value="3">
-        3
-      </style.Button>
-      <style.CalButton onClick={clickBtn} colortheme={theme} value="-">
-        -
-      </style.CalButton>
-      <style.Button onClick={clickBtn} value="0">
-        0
-      </style.Button>
+      {[2, 3, '-', 0].map(el =>
+        el === '-' ? (
+          <style.CalButton onClick={clickBtn} colortheme={theme} value="-">
+            -
+          </style.CalButton>
+        ) : (
+          <style.Button onClick={clickBtn} value={el}>
+            {el}
+          </style.Button>
+        ),
+      )}
       <style.Button onClick={clickBtn} className="doubleZero" value="00">
         <style.DoubleZeroButton path={band} value="00"></style.DoubleZeroButton>
         00
