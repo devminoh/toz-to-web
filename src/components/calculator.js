@@ -1,23 +1,7 @@
 import { Alert } from './alert';
 
- const number = ['0', '00', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
+  const number = ['0', '00', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   const oper = ['÷', 'x', '+', '-'];
-
-  const calculator = (operation, prevCalc, calc) => {
-    const nowSum = parseFloat(calc);
-    switch (operation) {
-      case '+':
-        return prevCalc + nowSum;
-      case '-':
-        return prevCalc - nowSum;
-      case '÷':
-        return prevCalc / nowSum;
-      case 'x':
-        return prevCalc * nowSum;
-      default:
-        return nowSum;
-    }
-  };
 
   export const clickCalc = (
     e,
@@ -37,10 +21,44 @@ import { Alert } from './alert';
     const value = e.target.value || e.target.alt || e.target?.firstChild.alt;
     console.log(value);
 
+    const color =
+      theme === 'aus'
+        ? 'rgba(25, 145, 208, 1)'
+        : theme === 'us'
+          ? 'rgba(0, 40, 140, 1)'
+          : theme === 'wimbledon'
+            ? 'rgba(0, 148, 79, 1)'
+            : 'rgba(5, 72, 47, 1)';
+    
+    const calculator = (operation, prevCalc, calc) => {
+      const nowSum = parseFloat(calc);
+      switch (operation) {
+        case '+':
+          return prevCalc + nowSum;
+        case '-':
+          return prevCalc - nowSum;
+        case '÷':
+          if (calc === 0) {
+            setScreen(prev => `${prev}÷0`);
+            Alert('error', '0으로 나눌 수 없습니다.', color);
+            return 0; // 혹은 다른 값을 반환하거나 처리 방법을 지정
+          }
+          return prevCalc / nowSum;
+        case 'x':
+          return prevCalc * nowSum;
+        default:
+          return nowSum;
+      }
+    };
+
     if (number.includes(value)) {
-      setCalc(prev => (prev === '0' ? value : prev + value));
-      setScreen(prev => prev + value);
-      setClear('C');
+      if(calc.length < 10) {
+        setCalc(prev => (prev === '0' ? value : prev + value));
+        setScreen(prev => prev + value);
+        setClear('C');
+      }else {
+        Alert('error', '숫자는 10자리까지만 입력가능합니다.', color);
+      }
       return;
     } else if (oper.includes(value)) {
       setScreen(prev => prev + value);
@@ -100,14 +118,14 @@ import { Alert } from './alert';
           break;
         case 'plusminus':
           const lastNumberMatch = screen.match(/[+-]?\d+(\.\d+)?$/);
-          const color =
-            theme === 'aus'
-              ? 'rgba(25, 145, 208, 1)'
-              : theme === 'us'
-                ? 'rgba(0, 40, 140, 1)'
-                : theme === 'wimbledon'
-                  ? 'rgba(0, 148, 79, 1)'
-                  : 'rgba(5, 72, 47, 1)';
+          // const color =
+          //   theme === 'aus'
+          //     ? 'rgba(25, 145, 208, 1)'
+          //     : theme === 'us'
+          //       ? 'rgba(0, 40, 140, 1)'
+          //       : theme === 'wimbledon'
+          //         ? 'rgba(0, 148, 79, 1)'
+          //         : 'rgba(5, 72, 47, 1)';
 
           // match 함수의 결과가 null인 경우 처리
           if (lastNumberMatch !== null) {
@@ -155,10 +173,15 @@ import { Alert } from './alert';
 
         case 'equal':
           const result = calculator(operation, prevCalc, parseFloat(calc));
-          setCalc(String(result.toFixed(10).replace(/\.?0+$/, ''))); //소수점 10의자리까지 반올림하고 뒤에 0은 지우기
+          if (result === Infinity) {
+            // Infinity일 경우, screen을 그대로 유지
+            Alert('error', '0으로 나눌 수 없습니다.', color);
+          } else {
+            setCalc(String(result.toFixed(10).replace(/\.?0+$/, '')));
+            setOperation('');
+            setPrevCalc(null);
+          }
           setScreen('');
-          setOperation('');
-          setPrevCalc(null);
           break;
       }
     }
