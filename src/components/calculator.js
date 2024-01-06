@@ -146,15 +146,15 @@ import { Alert } from './alert';
           break;
 
         case 'dot':
-          // calc.includes('.') ? setCalc(calc) : setCalc(calc + '.');
-          calc.includes('.') ? setCalc(calc) : setCalc(prev => prev + '.');
-          setScreen(prev => prev + '.');
+          if (!calc.includes('.')) {
+            setCalc(prev => prev + '.');
+            setScreen(prev => prev + '.');
+          }
           break;
 
         case 'equal':
-          // setCalc(String(calculator(operation, prevCalc, calc)));
           const result = calculator(operation, prevCalc, parseFloat(calc));
-          setCalc(String(result));
+          setCalc(String(result.toFixed(10).replace(/\.?0+$/, ''))); //소수점 10의자리까지 반올림하고 뒤에 0은 지우기
           setScreen('');
           setOperation('');
           setPrevCalc(null);
