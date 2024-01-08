@@ -38,7 +38,7 @@ function App() {
     'op :',
     operation
   );
-  console.log(screen);
+  console.log('screen:',screen);
 
   return (
     <style.AppContainer colortheme={theme}>

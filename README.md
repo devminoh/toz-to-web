@@ -5,36 +5,29 @@
 
 ## Available Scripts
 
-In the project directory, you can run:
+In the project directory, you can run: `npm start`
 
-### `npm start`
+## 🚧 기능구현
+# 연산
+[x] 두개 이하의 수 연산
+[x] 두개 이상의 수 연산
+[ ] 우선순위 연산자 계산 (ex. 2+3*4 = 14)
+[x] /0 이 들어왔을 경우 alert
+[ ] /0 을 지우고 난 뒤 계산
+[x] 부동소수점 변환
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+# 테마적용
+[x] 네가지의 theme 적용
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+# 예외처리
+[x] clear 버튼 클릭시 C-> AC 로 변경
+[x] 입력숫자는 10자리로 제한
+[x] .을 여러번 눌러도 한번만 인식
+[ ] equal 을 누른 뒤 연산자를 눌렀을 때 나온 결과값에 이어서 계산
+[ ] 연산자를 여러번 눌러도 한번만 표시 및 계산
+[ ] 여러 연산자를 연속으로 누르면 마지막 연산자로 계산
+[ ] 연산 이후 equal을 계속 누르면 마지막 연산이 연속 적용
 
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
 
 ### Code Splitting
 
@@ -43,10 +36,6 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/c
 ### Analyzing the Bundle Size
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
 
 ### Advanced Configuration
 

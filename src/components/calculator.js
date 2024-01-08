@@ -59,17 +59,17 @@ import { Alert } from './alert';
       }
       return;
     } else if (oper.includes(value)) {
-      // 현재까지의 계산식에서 괄호를 찾아 삽입
-      const lastExpressionMatch = screen.match(/[^+*/-]+$/);
-      const lastExpression = lastExpressionMatch ? lastExpressionMatch[0] : '';
-      console.log(lastExpressionMatch);
-      // 현재 입력된 연산자가 * 또는 / 이면서 이전 연산자가 + 또는 - 인 경우 괄호 삽입
-      if (['*', '/'].includes(value) && ['+', '-'].includes(operation)) {
-        setScreen(prev => prev + `(${lastExpression})${value}`);
-      } else {
-        setScreen(prev => prev + value);
-      }
-
+      // // 현재까지의 계산식에서 괄호를 찾아 삽입
+      // const lastExpressionMatch = screen.match(/[^+*/-]+$/);
+      // const lastExpression = lastExpressionMatch ? lastExpressionMatch[0] : '';
+      // console.log(lastExpression);
+      // // 현재 입력된 연산자가 * 또는 / 이면서 이전 연산자가 + 또는 - 인 경우 괄호 삽입
+      // if (['x', '÷'].includes(value) && ['+', '-'].includes(operation)) {
+      //   setScreen(prev => prev + `(${lastExpression})${value}`);
+      // } else {
+      //   setScreen(prev => prev + value);
+      // }
+      setScreen(prev => prev + value);
       const result = calculator(operation, prevCalc, parseFloat(calc));
       console.log(result);
 
@@ -120,7 +120,7 @@ import { Alert } from './alert';
             const newLastNumber =
               parseFloat(lastNumber) * -1 > 0
                 ? `+${parseFloat(lastNumber) * -1}`
-                : `(${parseFloat(lastNumber) * -1}`; // 부호 바꾸기
+                : `${parseFloat(lastNumber) * -1}`; // 부호 바꾸기
 
             const newScreen = screen.replace(
               /[+-]?\d+(\.\d+)?$/,
