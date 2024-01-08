@@ -30,7 +30,14 @@ function App() {
   const [calc, setCalc] = useState('0');
   const [prevCalc, setPrevCalc] = useState(0);
   const [operation, setOperation] = useState('');
-  console.log('calc :', calc, 'prev :', prevCalc, 'op :', operation);
+  console.log(
+    'calc :',
+    calc,
+    'prev :',
+    prevCalc,
+    'op :',
+    operation
+  );
   console.log(screen);
 
   return (

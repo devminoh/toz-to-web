@@ -34,10 +34,10 @@ const Button = ({
   screen,
   setScreen,
   theme,
-  setTheme,
+  setTheme
 }) => {
   const [clear, setClear] = useState('AC');
-  const clickBtn = (e)=> {
+  const clickBtn = e => {
     clickCalc(e, {
       calc,
       setCalc,
@@ -48,18 +48,24 @@ const Button = ({
       screen,
       setScreen,
       theme,
-      setClear,
+      setClear
     });
-  }
+  };
 
   //테마모달
   const [modalOpen, setModalOpen] = useState(false);
   const clickModal = () => {
     setModalOpen(!modalOpen);
   };
-  
+
   const cap =
-    theme === 'aus' ? ausCap : theme === 'us' ? usCap : theme === 'wimbledon' ? wimCap : rolCap;
+    theme === 'aus'
+      ? ausCap
+      : theme === 'us'
+        ? usCap
+        : theme === 'wimbledon'
+          ? wimCap
+          : rolCap;
   const band =
     theme === 'aus'
       ? ausBand
@@ -78,10 +84,10 @@ const Button = ({
           : rolTrophy;
 
   const buttons = [
-    {'name': '+/-', 'value': 'plusminus'},
-    {'name': '%', 'value': 'percent'}
-  ]
-  
+    { name: '+/-', value: 'plusminus' },
+    { name: '%', value: 'percent' },
+  ];
+
   return (
     <style.ButtonContainer>
       <style.ACButton onClick={clickBtn} path={ball} value="AC">

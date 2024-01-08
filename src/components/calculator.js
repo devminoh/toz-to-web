@@ -19,7 +19,7 @@ import { Alert } from './alert';
     },
   ) => {
     const value = e.target.value || e.target.alt || e.target?.firstChild.alt;
-    console.log(value);
+    console.log('누른버튼:', value);
 
     const color =
       theme === 'aus'
@@ -29,7 +29,7 @@ import { Alert } from './alert';
           : theme === 'wimbledon'
             ? 'rgba(0, 148, 79, 1)'
             : 'rgba(5, 72, 47, 1)';
-    
+
     const calculator = (operation, prevCalc, calc) => {
       const nowSum = parseFloat(calc);
       switch (operation) {
@@ -39,9 +39,7 @@ import { Alert } from './alert';
           return prevCalc - nowSum;
         case '÷':
           if (calc === 0) {
-            setScreen(prev => `${prev}÷0`);
-            Alert('error', '0으로 나눌 수 없습니다.', color);
-            return 0; // 혹은 다른 값을 반환하거나 처리 방법을 지정
+            return Infinity; // 나누기 0의 경우 Infinity 반환
           }
           return prevCalc / nowSum;
         case 'x':
@@ -52,16 +50,28 @@ import { Alert } from './alert';
     };
 
     if (number.includes(value)) {
-      if(calc.length < 10) {
+      if (calc.length < 10) {
         setCalc(prev => (prev === '0' ? value : prev + value));
         setScreen(prev => prev + value);
         setClear('C');
-      }else {
+      } else {
         Alert('error', '숫자는 10자리까지만 입력가능합니다.', color);
       }
       return;
     } else if (oper.includes(value)) {
-      setScreen(prev => prev + value);
+      // 현재까지의 계산식에서 괄호를 찾아 삽입
+      const lastExpressionMatch = screen.match(/[^+*/-]+$/);
+      const lastExpression = lastExpressionMatch ? lastExpressionMatch[0] : '';
+      console.log(lastExpressionMatch);
+      // 현재 입력된 연산자가 * 또는 / 이면서 이전 연산자가 + 또는 - 인 경우 괄호 삽입
+      if (['*', '/'].includes(value) && ['+', '-'].includes(operation)) {
+        setScreen(prev => prev + `(${lastExpression})${value}`);
+      } else {
+        setScreen(prev => prev + value);
+      }
+
+      const result = calculator(operation, prevCalc, parseFloat(calc));
+      console.log(result);
 
       if (operation && prevCalc !== null) {
         const currentPriority =
@@ -76,8 +86,8 @@ import { Alert } from './alert';
             : operation === 'x' || operation === '÷'
               ? 2
               : 0;
+        const result = calculator(operation, prevCalc, parseFloat(calc));
         if (currentPriority <= prevPriority) {
-          const result = calculator(operation, prevCalc, parseFloat(calc));
           setPrevCalc(result);
           setCalc('0');
         } else {
@@ -89,22 +99,6 @@ import { Alert } from './alert';
         setPrevCalc(parseFloat(calc));
         setCalc('0');
         setOperation(value);
-        //   // 현재 연산자가 * 또는 / 이면서 이전 연산자가 + 또는 - 인 경우
-        //   if (['*', '/'].includes(value) && ['+', '-'].includes(operation)) {
-        //     // 이전 연산 결과에 현재까지의 계산을 적용
-        //     const result = calculator(operation, prevCalc, parseFloat(calc));
-        //     setPrevCalc(result);
-        //     setCalc('0');
-        //   } else {
-        //     // 그 외의 경우는 현재까지의 계산 결과를 이용하여 새로운 연산 시작
-        //     setPrevCalc(parseFloat(calc));
-        //     setCalc('0');
-        //   }
-        //   setOperation(value);
-        // } else {
-        //   setPrevCalc(parseFloat(calc));
-        //   setCalc('0');
-        //   setOperation(value);
       }
     } else {
       switch (value) {
@@ -118,14 +112,6 @@ import { Alert } from './alert';
           break;
         case 'plusminus':
           const lastNumberMatch = screen.match(/[+-]?\d+(\.\d+)?$/);
-          // const color =
-          //   theme === 'aus'
-          //     ? 'rgba(25, 145, 208, 1)'
-          //     : theme === 'us'
-          //       ? 'rgba(0, 40, 140, 1)'
-          //       : theme === 'wimbledon'
-          //         ? 'rgba(0, 148, 79, 1)'
-          //         : 'rgba(5, 72, 47, 1)';
 
           // match 함수의 결과가 null인 경우 처리
           if (lastNumberMatch !== null) {
@@ -172,16 +158,36 @@ import { Alert } from './alert';
           break;
 
         case 'equal':
-          const result = calculator(operation, prevCalc, parseFloat(calc));
-          if (result === Infinity) {
-            // Infinity일 경우, screen을 그대로 유지
-            Alert('error', '0으로 나눌 수 없습니다.', color);
+          // 괄호가 있는지 확인
+          const hasParenthesis = /\([^)]*\)/.test(screen);
+
+          if (hasParenthesis) {
+            // 괄호가 있으면 괄호 안의 계산을 먼저 수행
+            const resultWithParenthesis = calculator(
+              operation,
+              prevCalc,
+              parseFloat(calc),
+            );
+            setPrevCalc(resultWithParenthesis);
+            setCalc('0');
           } else {
-            setCalc(String(result.toFixed(10).replace(/\.?0+$/, '')));
-            setOperation('');
-            setPrevCalc(null);
+            // 괄호가 없으면 기존의 로직을 따라 수행
+            const result = calculator(operation, prevCalc, parseFloat(calc));
+            setPrevCalc(parseFloat(calc));
+            setCalc('0');
+            if (result !== Infinity) {
+              setCalc(String(result.toFixed(10).replace(/\.?0+$/, ''))); //부동소수점계산
+              setScreen('');
+            } else {
+              Alert('error', '0으로 나눌 수 없습니다.', color);
+            }
           }
-          setScreen('');
+
+
+          // const result = calculator(operation, prevCalc, parseFloat(calc));
+          // setPrevCalc(null);
+
+          setOperation('');
           break;
       }
     }
