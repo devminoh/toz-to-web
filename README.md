@@ -27,6 +27,7 @@ In the project directory, you can run: `npm start`
 - [ ] 연산자를 여러번 눌러도 한번만 표시 및 계산
 - [ ] 여러 연산자를 연속으로 누르면 마지막 연산자로 계산
 - [ ] 연산 이후 equal을 계속 누르면 마지막 연산이 연속 적용
+- [x] 계산식에 연산자없이 숫자만 있을경우 plus/minus버튼을 누르면 양수여도 +가 앞에 표시되지않음
 
 
 ### Code Splitting

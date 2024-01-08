@@ -118,9 +118,9 @@ import { Alert } from './alert';
             const lastNumber = lastNumberMatch[0]; // 현재 표시된 계산식에서 마지막 숫자 추출
 
             const newLastNumber =
-              parseFloat(lastNumber) * -1 > 0
-                ? `+${parseFloat(lastNumber) * -1}`
-                : `${parseFloat(lastNumber) * -1}`; // 부호 바꾸기
+              parseFloat(lastNumber) * -1 <= 0
+                ? `${parseFloat(lastNumber) * -1}`
+                : `+${parseFloat(lastNumber) * -1}`; // 부호 바꾸기
 
             const newScreen = screen.replace(
               /[+-]?\d+(\.\d+)?$/,
@@ -131,7 +131,11 @@ import { Alert } from './alert';
               Alert('error', '올바르지 않은 계산식입니다.', color);
               return;
             } else {
-              setScreen(newScreen);
+              // 연산자없이 숫자만 screen에 있으면 +5가 아니라 5로 표시
+              setScreen(prev =>
+                newScreen[0] === '+' ? newScreen.slice(1) : newScreen,
+              );
+              // setScreen(newScreen);
             }
           } else {
             // alert('올바른 숫자가 없습니다.');
