@@ -2,6 +2,8 @@ import { Alert } from './alert';
 
   const number = ['0', '00', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   const oper = ['÷', 'x', '+', '-'];
+  let lastOper = '';
+  let lastNum = [];
 
   export const clickCalc = (
     e,
@@ -49,11 +51,20 @@ import { Alert } from './alert';
       }
     };
 
+    const lastScreen = screen[screen.length -1];
+
     if (number.includes(value)) {
       if (calc.length < 10) {
+        if(screen === '' && (value === '00' || value === '0')){
+          return;
+        }
         setCalc(prev => (prev === '0' ? value : prev + value));
         setScreen(prev => prev + value);
         setClear('C');
+        if(operation === 'equal'){
+          setCalc(value === '00' ? '0' : value);
+          lastNum = [];
+        }
       } else {
         Alert('error', '숫자는 10자리까지만 입력가능합니다.', color);
       }
@@ -69,36 +80,60 @@ import { Alert } from './alert';
       // } else {
       //   setScreen(prev => prev + value);
       // }
-      setScreen(prev => prev + value);
-      const result = calculator(operation, prevCalc, parseFloat(calc));
-      console.log(result);
+      // 이전에 누른 버튼이 연산자가 아니거나 현재누른 버튼과 다를때만 계산
+      if(!oper.includes(lastScreen) || lastScreen !== value){
+        if(screen === '' && operation === 'equal'){ //계산 이후로 연산자누르면 연속해서 계산
+          setScreen(prev => calc);
+        }
 
-      if (operation && prevCalc !== null) {
-        const currentPriority =
-          value === '+' || value === '-'
-            ? 1
-            : value === 'x' || value === '÷'
-              ? 2
-              : 0;
-        const prevPriority =
-          operation === '+' || operation === '-'
-            ? 1
-            : operation === 'x' || operation === '÷'
-              ? 2
-              : 0;
-        const result = calculator(operation, prevCalc, parseFloat(calc));
-        if (currentPriority <= prevPriority) {
-          setPrevCalc(result);
-          setCalc('0');
-        } else {
+        lastOper = value;
+
+        if(lastOper !== ''){
           setPrevCalc(parseFloat(calc));
           setCalc('0');
         }
-        setOperation(value);
-      } else {
-        setPrevCalc(parseFloat(calc));
-        setCalc('0');
-        setOperation(value);
+        // setScreen(prev => prev + value);
+        
+        setScreen(prev => {
+          const char = prev.length-1
+          return oper.includes(prev[char]) && prev[char] !== value 
+            ? `${prev.slice(0, char)}${lastOper}`
+            : prev + lastOper;
+        });
+  
+        // const result = calculator(operation, prevCalc, parseFloat(calc));
+        // console.log(result);
+  
+        if (operation && prevCalc !== null) {
+          const currentPriority =
+            value === '+' || value === '-'
+              ? 1
+              : value === 'x' || value === '÷'
+                ? 2
+                : 0;
+          const prevPriority =
+            operation === '+' || operation === '-'
+              ? 1
+              : operation === 'x' || operation === '÷'
+                ? 2
+                : 0;
+          const result = calculator(operation, prevCalc, parseFloat(calc));
+          if (currentPriority <= prevPriority) {
+            console.log('a')
+            setPrevCalc(result);
+            setCalc('0');
+          } else {
+            console.log('b')
+            setPrevCalc(result);
+            setCalc('0');
+          }
+          setOperation(value);
+        } else {
+          console.log('c')
+          setPrevCalc(parseFloat(calc));
+          setCalc('0');
+          setOperation(value);
+        }
       }
     } else {
       switch (value) {
@@ -109,6 +144,8 @@ import { Alert } from './alert';
           setPrevCalc(0);
           setScreen('');
           setClear('AC');
+          lastNum = [];
+          lastOper = '';
           break;
         case 'plusminus':
           const lastNumberMatch = screen.match(/[+-]?\d+(\.\d+)?$/);
@@ -155,43 +192,52 @@ import { Alert } from './alert';
           break;
 
         case 'dot':
+          // const lastScreen = screen[screen.length -1];
           if (!calc.includes('.')) {
-            setCalc(prev => prev + '.');
-            setScreen(prev => prev + '.');
+            if(screen === ''){
+              setCalc(prev => '0.');
+              setScreen(prev => '0.')
+            }else if(oper.includes(lastScreen)){
+              setCalc(prev => prev + '.');
+              setScreen(prev => prev + '0.')
+            }else{
+              setCalc(prev => prev + '.');
+              setScreen(prev => prev + '.');
+            }
           }
           break;
 
         case 'equal':
-          // 괄호가 있는지 확인
-          const hasParenthesis = /\([^)]*\)/.test(screen);
-
-          if (hasParenthesis) {
-            // 괄호가 있으면 괄호 안의 계산을 먼저 수행
-            const resultWithParenthesis = calculator(
-              operation,
-              prevCalc,
-              parseFloat(calc),
-            );
-            setPrevCalc(resultWithParenthesis);
-            setCalc('0');
-          } else {
-            // 괄호가 없으면 기존의 로직을 따라 수행
-            const result = calculator(operation, prevCalc, parseFloat(calc));
+            //부동소수점계산
+            console.log(lastOper)
+            const result = calculator(operation, prevCalc, parseFloat(calc))
+              .toFixed(10)
+              .replace(/\.?0+$/, '');
             setPrevCalc(parseFloat(calc));
             setCalc('0');
             if (result !== Infinity) {
-              setCalc(String(result.toFixed(10).replace(/\.?0+$/, ''))); //부동소수점계산
+              setCalc(String(result));
               setScreen('');
             } else {
+              // /0일경우
               Alert('error', '0으로 나눌 수 없습니다.', color);
             }
+          if(lastOper !== '' && operation === 'equal'){
+            lastNum.push(prevCalc);
+            const lastResult = calculator(
+              lastOper,
+              parseFloat(calc),
+              lastNum[0],
+            )
+              .toFixed(10)
+              .replace(/\.?0+$/, '');
+            setCalc(lastResult);
+            // setPrevCalc(prevCalc);
+            setScreen('')
           }
-
-
           // const result = calculator(operation, prevCalc, parseFloat(calc));
           // setPrevCalc(null);
-
-          setOperation('');
+          setOperation(value);
           break;
       }
     }
