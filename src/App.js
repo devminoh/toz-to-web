@@ -15,7 +15,11 @@ import Button from './components/Button';
 
 function App() {
   // theme
-  const [theme, setTheme] = useState('aus');
+  const [theme, setTheme] = useState(() => {
+    // 로컬 스토리지에서 테마 정보 불러오기, 없으면 기본값 'aus'
+    const storedTheme = localStorage.getItem('theme');
+    return storedTheme || 'aus';
+  });
   // const theme = ['aus', 'us', 'wimbledon', 'roland'];
   const logo =
     theme === 'aus'

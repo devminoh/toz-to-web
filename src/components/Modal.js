@@ -7,6 +7,17 @@ import us from '../image/logo/usopen-logo.svg';
 import wim from '../image/logo/wimbledon-logo.svg';
 
 const CustomModal = ({ modalOpen, setModalOpen, setTheme, theme }) => {
+  const themes = [
+    { name: 'aus', src: aus },
+    { name: 'roland', src: rol },
+    { name: 'wimbledon', src: wim },
+    { name: 'us', src: us },
+  ];
+
+  const changeTheme = (newTheme) => {
+    setTheme(newTheme);
+    localStorage.setItem('theme', newTheme);
+  };
 
   return (
     <Modal
@@ -18,30 +29,15 @@ const CustomModal = ({ modalOpen, setModalOpen, setTheme, theme }) => {
       shouldCloseOnOverlayClick={false}
     >
       <style.Title>테마선택</style.Title>
-      <style.Theme
-        src={aus}
-        onClick={() => {
-          setTheme('aus');
-        }}
-      ></style.Theme>
-      <style.Theme
-        src={rol}
-        onClick={() => {
-          setTheme('roland');
-        }}
-      ></style.Theme>
-      <style.Theme
-        src={wim}
-        onClick={() => {
-          setTheme('wimbledon');
-        }}
-      ></style.Theme>
-      <style.Theme
-        src={us}
-        onClick={() => {
-          setTheme('us');
-        }}
-      ></style.Theme>
+      {themes.map(({ name, src }) => (
+        <style.Theme
+          key={name}
+          src={src}
+          onClick={() => {
+            changeTheme(name);
+          }}
+        ></style.Theme>
+      ))}
     </Modal>
   );
 };

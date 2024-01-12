@@ -8,17 +8,17 @@
 In the project directory, you can run: `npm start`
 
 ## 🚧 기능구현
-# 기본연산
+### 기본연산
 - [x] 두개 이하의 수 연산
 - [x] 두개 이상의 수 연산
 - [x] 우선순위 연산자 계산 (ex. 2+3*4 = 14)
 - [x] 부동소수점 변환
 
-# 테마적용
+### 테마적용
 - [x] 네가지의 theme 적용
 - [ ] 마지막으로 설정한 theme 저장
 
-# 예외처리
+### 예외처리
 - [x] clear 버튼 클릭시 C-> AC 로 변경
 - [x] 입력숫자는 10자리로 제한
 - [x] equal 을 누른 뒤 연산자를 눌렀을 때 나온 결과값에 이어서 계산
@@ -30,36 +30,15 @@ In the project directory, you can run: `npm start`
 - [x] 아무것도 없을때 00을 누르면 0으로 표시되고 무시
 - [x] 아무것도 없을때 연산자 먼저 누르면 무시
 
-# plus/minus 예외
+### plus/minus 예외
 
-# /0 예외
+### /0 예외
 - [x] /0 이 들어왔을 경우 alert
 - [x] /0 을 지우고 난 뒤 계산
-# decimal 예외
+### decimal 예외
 - [x] .을 여러번 눌러도 한번만 인식
 - [x] screen에 아무것도 없을때 .을 누르면 0.으로 인식
 - [x] 연산자를 누른후 .을 누르면 0.으로 인식
-
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
 # 🔎 Skills
 
