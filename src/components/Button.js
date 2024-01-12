@@ -94,7 +94,12 @@ const Button = ({
         {clear}
       </style.ACButton>
       {buttons.map(el => (
-        <style.CalButton onClick={clickBtn} colortheme={theme} value={el.value}>
+        <style.CalButton
+          onClick={clickBtn}
+          colortheme={theme}
+          value={el.value}
+          key={el.name}
+        >
           {el.name}
         </style.CalButton>
       ))}
@@ -123,7 +128,7 @@ const Button = ({
         {/* <CustomModal modalOpen={modalOpen} setModalOpen={setModalOpen} /> */}
       </style.Button>
       {[7, 8].map(el => (
-        <style.Button onClick={clickBtn} value={el}>
+        <style.Button onClick={clickBtn} value={el} key={el}>
           {el}
         </style.Button>
       ))}
@@ -142,7 +147,7 @@ const Button = ({
         =
       </style.EqualButton>
       {[4, 5, 6].map(el => (
-        <style.Button onClick={clickBtn} value={el}>
+        <style.Button onClick={clickBtn} value={el} key={el}>
           {el}
         </style.Button>
       ))}
@@ -154,11 +159,11 @@ const Button = ({
       </style.Button>
       {[2, 3, '-', 0].map(el =>
         el === '-' ? (
-          <style.CalButton onClick={clickBtn} colortheme={theme} value="-">
+          <style.CalButton onClick={clickBtn} colortheme={theme} value="-" key={'minus'}>
             -
           </style.CalButton>
         ) : (
-          <style.Button onClick={clickBtn} value={el}>
+          <style.Button onClick={clickBtn} value={el} key={el}>
             {el}
           </style.Button>
         ),

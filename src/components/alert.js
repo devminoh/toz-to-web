@@ -5,7 +5,6 @@ import withReactContent from 'sweetalert2-react-content';
 const MySwal = withReactContent(Swal);
 
 export const Alert = (icon, content, confirmButtonColor) => {
-  console.log(MySwal);
   MySwal.fire({
     icon,
     // title: 'Oops...',
@@ -14,5 +13,15 @@ export const Alert = (icon, content, confirmButtonColor) => {
     width: 300,
     confirmButtonColor,
     confirmButtonText: '확인',
+  });
+};
+
+export const Alert2 = (icon, content) => {
+  MySwal.fire({
+    position: 'top-end',
+    icon,
+    title: content,
+    showConfirmButton: false,
+    timer: 1500,
   });
 };

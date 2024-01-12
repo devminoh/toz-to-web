@@ -1,4 +1,5 @@
-import { Alert } from './alert';
+import { Alert, Alert2 } from './alert';
+import { stackCalc, postfixScreen } from './fixScreen';
 
   const number = ['0', '00', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   const oper = ['÷', 'x', '+', '-'];
@@ -22,7 +23,6 @@ import { Alert } from './alert';
   ) => {
     const value = e.target.value || e.target.alt || e.target?.firstChild.alt;
     console.log('누른버튼:', value);
-
     const color =
       theme === 'aus'
         ? 'rgba(25, 145, 208, 1)'
@@ -34,6 +34,7 @@ import { Alert } from './alert';
 
     const calculator = (operation, prevCalc, calc) => {
       const nowSum = parseFloat(calc);
+
       switch (operation) {
         case '+':
           return prevCalc + nowSum;
@@ -51,89 +52,59 @@ import { Alert } from './alert';
       }
     };
 
-    const lastScreen = screen[screen.length -1];
+    const lastScreen = screen[screen.length - 1];
 
     if (number.includes(value)) {
       if (calc.length < 10) {
-        if(screen === '' && (value === '00' || value === '0')){
+        if (screen === '' && (value === '00' || value === '0')) {
           return;
         }
         setCalc(prev => (prev === '0' ? value : prev + value));
         setScreen(prev => prev + value);
         setClear('C');
-        if(operation === 'equal'){
+        if (operation === 'equal') {
           setCalc(value === '00' ? '0' : value);
           lastNum = [];
         }
       } else {
-        Alert('error', '숫자는 10자리까지만 입력가능합니다.', color);
+        Alert2('error', '숫자는 10자리까지만 입력가능합니다.', color);
       }
       return;
     } else if (oper.includes(value)) {
-      // // 현재까지의 계산식에서 괄호를 찾아 삽입
-      // const lastExpressionMatch = screen.match(/[^+*/-]+$/);
-      // const lastExpression = lastExpressionMatch ? lastExpressionMatch[0] : '';
-      // console.log(lastExpression);
-      // // 현재 입력된 연산자가 * 또는 / 이면서 이전 연산자가 + 또는 - 인 경우 괄호 삽입
-      // if (['x', '÷'].includes(value) && ['+', '-'].includes(operation)) {
-      //   setScreen(prev => prev + `(${lastExpression})${value}`);
-      // } else {
-      //   setScreen(prev => prev + value);
-      // }
+      if(screen === ''){
+        console.log('here')
+        Alert2('error', '완성되지 않은 수식입니다.');
+        setScreen('')
+      }
       // 이전에 누른 버튼이 연산자가 아니거나 현재누른 버튼과 다를때만 계산
-      if(!oper.includes(lastScreen) || lastScreen !== value){
-        if(screen === '' && operation === 'equal'){ //계산 이후로 연산자누르면 연속해서 계산
+      else if (!oper.includes(lastScreen) || lastScreen !== value) {
+        //계산 이후로 연산자누르면 연속해서 계산
+        if (screen === '' && operation === 'equal') {
           setScreen(prev => calc);
         }
 
         lastOper = value;
 
-        if(lastOper !== ''){
+        if (lastOper !== '') {
           setPrevCalc(parseFloat(calc));
-          setCalc('0');
         }
-        // setScreen(prev => prev + value);
-        
+        // 마지막 연산자만 스크린에 표시되도록
         setScreen(prev => {
-          const char = prev.length-1
-          return oper.includes(prev[char]) && prev[char] !== value 
+          const char = prev.length - 1;
+          return oper.includes(prev[char]) && prev[char] !== value
             ? `${prev.slice(0, char)}${lastOper}`
             : prev + lastOper;
         });
-  
-        // const result = calculator(operation, prevCalc, parseFloat(calc));
-        // console.log(result);
-  
+
         if (operation && prevCalc !== null) {
-          const currentPriority =
-            value === '+' || value === '-'
-              ? 1
-              : value === 'x' || value === '÷'
-                ? 2
-                : 0;
-          const prevPriority =
-            operation === '+' || operation === '-'
-              ? 1
-              : operation === 'x' || operation === '÷'
-                ? 2
-                : 0;
           const result = calculator(operation, prevCalc, parseFloat(calc));
-          if (currentPriority <= prevPriority) {
-            console.log('a')
-            setPrevCalc(result);
-            setCalc('0');
-          } else {
-            console.log('b')
-            setPrevCalc(result);
-            setCalc('0');
-          }
+          setPrevCalc(result);
           setOperation(value);
         } else {
-          console.log('c')
           setPrevCalc(parseFloat(calc));
-          setCalc('0');
           setOperation(value);
         }
+        setCalc('0');
       }
     } else {
       switch (value) {
@@ -172,7 +143,6 @@ import { Alert } from './alert';
               setScreen(prev =>
                 newScreen[0] === '+' ? newScreen.slice(1) : newScreen,
               );
-              // setScreen(newScreen);
             }
           } else {
             // alert('올바른 숫자가 없습니다.');
@@ -183,6 +153,7 @@ import { Alert } from './alert';
 
         case 'percent':
           setCalc(String(parseFloat(calc) / 100));
+          setScreen(String(parseFloat(calc) / 100));
           break;
 
         case 'delete':
@@ -194,13 +165,13 @@ import { Alert } from './alert';
         case 'dot':
           // const lastScreen = screen[screen.length -1];
           if (!calc.includes('.')) {
-            if(screen === ''){
+            if (screen === '') {
               setCalc(prev => '0.');
-              setScreen(prev => '0.')
-            }else if(oper.includes(lastScreen)){
+              setScreen(prev => '0.');
+            } else if (oper.includes(lastScreen)) {
               setCalc(prev => prev + '.');
-              setScreen(prev => prev + '0.')
-            }else{
+              setScreen(prev => prev + '0.');
+            } else {
               setCalc(prev => prev + '.');
               setScreen(prev => prev + '.');
             }
@@ -208,21 +179,22 @@ import { Alert } from './alert';
           break;
 
         case 'equal':
-            //부동소수점계산
-            console.log(lastOper)
-            const result = calculator(operation, prevCalc, parseFloat(calc))
-              .toFixed(10)
-              .replace(/\.?0+$/, '');
-            setPrevCalc(parseFloat(calc));
-            setCalc('0');
-            if (result !== Infinity) {
-              setCalc(String(result));
-              setScreen('');
-            } else {
-              // /0일경우
-              Alert('error', '0으로 나눌 수 없습니다.', color);
-            }
-          if(lastOper !== '' && operation === 'equal'){
+          //부동소수점계산
+          // const result = calculator(operation, prevCalc, parseFloat(calc))
+          //   .toFixed(10)
+          //   .replace(/\.?0+$/, '');
+          const result = stackCalc(postfixScreen(screen));
+          setPrevCalc(parseFloat(calc));
+          setCalc('0');
+          if (result !== 'Infinity') {
+            setCalc(result);
+            setScreen('');
+          } else {
+            // /0일경우
+            setScreen(screen);
+          }
+          // equal이후로 연속계산하기
+          if (lastOper !== '' && operation === 'equal') {
             lastNum.push(prevCalc);
             const lastResult = calculator(
               lastOper,
@@ -232,11 +204,8 @@ import { Alert } from './alert';
               .toFixed(10)
               .replace(/\.?0+$/, '');
             setCalc(lastResult);
-            // setPrevCalc(prevCalc);
-            setScreen('')
+            setScreen('');
           }
-          // const result = calculator(operation, prevCalc, parseFloat(calc));
-          // setPrevCalc(null);
           setOperation(value);
           break;
       }
