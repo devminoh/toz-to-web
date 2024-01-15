@@ -16,7 +16,7 @@ In the project directory, you can run: `npm start`
 
 ### 테마적용
 - [x] 네가지의 theme 적용
-- [ ] 마지막으로 설정한 theme 저장
+- [x] 마지막으로 설정한 theme 저장
 
 ### 예외처리
 - [x] clear 버튼 클릭시 C-> AC 로 변경
@@ -29,8 +29,6 @@ In the project directory, you can run: `npm start`
 - [x] 아무것도 없을때 0을 누르고 숫자를 누르면 0은 무시
 - [x] 아무것도 없을때 00을 누르면 0으로 표시되고 무시
 - [x] 아무것도 없을때 연산자 먼저 누르면 무시
-
-### plus/minus 예외
 
 ### /0 예외
 - [x] /0 이 들어왔을 경우 alert

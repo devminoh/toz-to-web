@@ -7,7 +7,6 @@ const MySwal = withReactContent(Swal);
 export const Alert = (icon, content, confirmButtonColor) => {
   MySwal.fire({
     icon,
-    // title: 'Oops...',
     html: content,
     padding: '10px',
     width: 300,
@@ -20,7 +19,8 @@ export const Alert2 = (icon, content) => {
   MySwal.fire({
     position: 'top-end',
     icon,
-    title: content,
+    html: content,
+    width: '300px',
     showConfirmButton: false,
     timer: 1500,
   });

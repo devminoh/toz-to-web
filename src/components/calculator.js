@@ -146,7 +146,7 @@ import { stackCalc, postfixScreen } from './fixScreen';
             }
           } else {
             // alert('올바른 숫자가 없습니다.');
-            Alert('error', '올바른 숫자가 없습니다.', color);
+            Alert2('error', '올바른 숫자가 없습니다.', color);
           }
           setCalc(String(parseFloat(calc) * -1));
           break;
@@ -175,14 +175,11 @@ import { stackCalc, postfixScreen } from './fixScreen';
               setCalc(prev => prev + '.');
               setScreen(prev => prev + '.');
             }
+            setClear('C');
           }
           break;
 
         case 'equal':
-          //부동소수점계산
-          // const result = calculator(operation, prevCalc, parseFloat(calc))
-          //   .toFixed(10)
-          //   .replace(/\.?0+$/, '');
           const result = stackCalc(postfixScreen(screen));
           setPrevCalc(parseFloat(calc));
           setCalc('0');
