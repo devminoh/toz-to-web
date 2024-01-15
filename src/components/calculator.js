@@ -151,8 +151,17 @@ import { stackCalc, postfixScreen } from './fixScreen';
           break;
 
         case 'percent':
-          setCalc(String(parseFloat(calc) / 100));
-          setScreen(String(parseFloat(calc) / 100));
+          if(screen === ''){
+            Alert2('error', '완성되지 않은 수식입니다.')
+            setScreen('');
+            setCalc('0');
+            break;
+          }
+          const percentValue = String(parseFloat(calc) / 100);
+          const valueLen = calc.length;
+
+          setScreen(prev => String(prev).slice(0, -valueLen) + percentValue);
+          setCalc(percentValue);
           break;
 
         case 'delete':
