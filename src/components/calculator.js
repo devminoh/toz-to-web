@@ -72,7 +72,6 @@ import { stackCalc, postfixScreen } from './fixScreen';
       return;
     } else if (oper.includes(value)) {
       if(screen === ''){
-        console.log('here')
         Alert2('error', '완성되지 않은 수식입니다.');
         setScreen('')
       }
@@ -180,6 +179,11 @@ import { stackCalc, postfixScreen } from './fixScreen';
           break;
 
         case 'equal':
+          if (oper.includes(lastScreen)) {
+            Alert2('error', '완성되지 않은 수식입니다.');
+            setScreen(screen);
+            return;
+          }
           const result = stackCalc(postfixScreen(screen));
           setPrevCalc(parseFloat(calc));
           setCalc('0');

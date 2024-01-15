@@ -35,11 +35,9 @@ export const stackCalc = (fixScreen) => {
 
       // 음수일 경우 스택에 음수로 푸시
       if (num !== '') {
-        // console.log(num, isNegative)
         stack.push(isNegative ? -Number(num) : Number(num));
       }
     } else if (oper.includes(token)) {
-      // console.log(stack)
       // 연산자인 경우
       let a = Number(stack.pop());
       let b = Number(stack.pop());
@@ -51,7 +49,6 @@ export const stackCalc = (fixScreen) => {
           stack.push(b - a);
           break;
         case 'x':
-          // console.log(a, b);
           stack.push(b * a);
           break;
         case '÷':
