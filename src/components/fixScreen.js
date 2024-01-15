@@ -66,7 +66,7 @@ export const stackCalc = (fixScreen) => {
     }
   }
   //부동소수점 계산
-  return String(stack[0].toFixed(10).replace(/\.?0+$/, ''));
+  return String(Number(stack[0]).toFixed(10).replace(/\.?0+$/, ''));
 }
 
 //screen 받아서 연산자와 숫자사이의 공백 넣어주기
