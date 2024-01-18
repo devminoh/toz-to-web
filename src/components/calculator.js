@@ -21,8 +21,9 @@ import { stackCalc, postfixScreen } from './fixScreen';
       setClear,
     },
   ) => {
-    const value = e.target.value || e.target.alt || e.target?.firstChild.alt;
-    console.log('누른버튼:', value);
+    const value =
+      e.target.value || e.target.alt || e.target.attributes.value.value;
+    // console.log('누른버튼:', value);
     const color =
       theme === 'aus'
         ? 'rgba(25, 145, 208, 1)'
@@ -33,6 +34,7 @@ import { stackCalc, postfixScreen } from './fixScreen';
             : 'rgba(5, 72, 47, 1)';
 
     const calculator = (operation, prevCalc, calc) => {
+      console.log('calculator')
       const nowSum = parseFloat(calc);
 
       switch (operation) {
@@ -171,7 +173,6 @@ import { stackCalc, postfixScreen } from './fixScreen';
           break;
 
         case 'dot':
-          // const lastScreen = screen[screen.length -1];
           if (!calc.includes('.')) {
             if (screen === '') {
               setCalc(prev => '0.');

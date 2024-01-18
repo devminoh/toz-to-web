@@ -210,40 +210,37 @@ export const EqualButton = styled(Button)`
   }
 `;
 
-export const NineButton = styled(Button)`
+export const ImageBtn = styled.div`
+  height: 58px;
+  cursor: pointer;
   position: absolute;
   background: url(${props => props?.path}) no-repeat;
-  background-size: 100%;
-  left: -12px;
-  top: -17px;
-  width: 74px;
   border: none;
   box-shadow: none;
-
-  &:active {
-    top: -30px;
-    transition: 0.2s;
-  }
 
   &:hover {
     opacity: 100%;
   }
 `;
 
-export const DoubleZeroButton = styled(Button)`
-  position: absolute;
-  background: url(${props => props?.path}) no-repeat;
+export const NineButton = styled(ImageBtn)`
+  width: 58px;
+  background-size: 100%;
+  left: -12px;
+  top: -17px;
+  width: 74px;
+
+  &:active {
+    top: -30px;
+    transition: 0.2s;
+  }
+`;
+
+export const DoubleZeroButton = styled(ImageBtn)`
   background-size: 94%;
   left: 0px;
   top: 2px;
   width: 61px;
-  border: none;
-  box-shadow: none;
-  border-radius: 0;
-
-  &:hover {
-    opacity: 100%;
-  }
 `;
 
 

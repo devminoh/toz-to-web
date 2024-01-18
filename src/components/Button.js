@@ -125,7 +125,6 @@ const Button = ({
             theme={theme}
           />
         ) : null}
-        {/* <CustomModal modalOpen={modalOpen} setModalOpen={setModalOpen} /> */}
       </style.Button>
       {[7, 8].map(el => (
         <style.Button onClick={clickBtn} value={el} key={el}>
@@ -133,7 +132,7 @@ const Button = ({
         </style.Button>
       ))}
       <style.Button onClick={clickBtn} className="nine" value="9">
-        <style.NineButton path={cap} value="9"></style.NineButton>9
+        <style.NineButton path={cap} value="9" />9
       </style.Button>
       <style.CalButton onClick={clickBtn} colortheme={theme} value="÷">
         ÷
@@ -169,7 +168,7 @@ const Button = ({
         ),
       )}
       <style.Button onClick={clickBtn} className="doubleZero" value="00">
-        <style.DoubleZeroButton path={band} value="00"></style.DoubleZeroButton>
+        <style.DoubleZeroButton path={band} value="00" />
         00
       </style.Button>
       <style.Button onClick={clickBtn} value="dot">

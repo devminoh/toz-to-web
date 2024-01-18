@@ -83,9 +83,8 @@ function spaceScreen(screen) {
         formattedScreen += currentNumber + ' ';
         currentNumber = ''; // 현재 숫자 초기화
       }
-      // 부호인 경우 확인
+      // 음수/양수 확인
       char === '-' && (i === 0 || oper.includes(screen[i - 1]))
-        // ? formattedScreen += char
         ? formattedScreen += `n` // 음수일경우 n라고 표현해서 넣어줌
         : formattedScreen += char + ' ';
     } else {
