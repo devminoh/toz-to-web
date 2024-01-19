@@ -178,6 +178,7 @@ const Button = ({
             value={el.value}
             key={el.name}
             path={el.path ? el.path : null}
+            theme={el.path ? theme : null}
           >
             {el.value}
           </style.Button>

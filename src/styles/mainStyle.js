@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import NotoSansBold from '../fonts/NotoSansKR-Bold.woff'
 
 const rgba = (r, g, b, a) => `rgba(${r}, ${g}, ${b}, ${a})`;
@@ -148,6 +148,12 @@ export const Button = styled.button`
     display: flex;
     font-size: 20px;
     padding: 4px;
+
+    ${props =>
+      (props.theme === 'wimbledon' || props.theme === 'us') &&
+      css`
+        padding-top: 15px;
+      `}
   }
 
   &.nine {
