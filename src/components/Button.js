@@ -8,21 +8,21 @@ import menu from '../image/ic-menu.png';
 import del from '../image/del.svg'
 import ball from '../image/ball.svg';
 
-import ausCap from '../image/cap/ausCap.svg';
+import ausCap from '../image/Cap/ausCap.svg';
 import ausTrophy from '../image/Trophy/ausTrophy.svg';
-import ausBand from '../image/band/ausBand.svg';
+import ausBand from '../image/Band/ausBand.svg';
 
-import usCap from '../image/cap/usCap.svg';
+import usCap from '../image/Cap/usCap.svg';
 import usTrophy from '../image/Trophy/usTrophy.svg';
-import usBand from '../image/band/usBand.svg';
+import usBand from '../image/Band/usBand.svg';
 
-import rolCap from '../image/cap/rolCap.svg';
+import rolCap from '../image/Cap/rolCap.svg';
 import rolTrophy from '../image/Trophy/rolTrophy.svg';
-import rolBand from '../image/band/rolBand.svg';
+import rolBand from '../image/Band/rolBand.svg';
 
-import wimCap from '../image/cap/wimCap.svg';
+import wimCap from '../image/Cap/wimCap.svg';
 import wimTrophy from '../image/Trophy/wimTrophy.svg';
-import wimBand from '../image/band/wimBand.svg';
+import wimBand from '../image/Band/wimBand.svg';
 
 const Button = ({
   calc,
@@ -83,9 +83,30 @@ const Button = ({
           ? wimTrophy
           : rolTrophy;
 
+  const topbuttons = [
+    { name: '+/-', value: 'plusminus', colortheme: theme },
+    { name: '%', value: 'percent', colortheme: theme },
+    { name: 'del', value: 'delete', src: del },
+  ];
+
   const buttons = [
-    { name: '+/-', value: 'plusminus' },
-    { name: '%', value: 'percent' },
+    { name: '7', value: '7' },
+    { name: '8', value: '8' },
+    { name: 'nine', value: '9', path: cap },
+    { name: 'div', value: '÷', colortheme: theme },
+    { name: 'equal', value: '=', colortheme: theme },
+    { name: '4', value: '4' },
+    { name: '5', value: '5' },
+    { name: '6', value: '6' },
+    { name: 'mul', value: 'x', colortheme: theme },
+    { name: 'one', value: '1', path: Trophy },
+    { name: '2', value: '2' },
+    { name: '3', value: '3' },
+    { name: 'minus', value: '-', colortheme: theme },
+    { name: '0', value: '0' },
+    { name: 'doubleZero', value: '00', path: band },
+    { name: 'dot', value: '.' },
+    { name: 'plus', value: '+', colortheme: theme },
   ];
 
   return (
@@ -93,21 +114,19 @@ const Button = ({
       <style.ACButton onClick={clickBtn} path={ball} value="AC">
         {clear}
       </style.ACButton>
-      {buttons.map(el => (
+      {topbuttons.map(el => (
         <style.CalButton
           onClick={clickBtn}
           colortheme={theme}
           value={el.value}
-          key={el.name}
+          key={el.value}
+          path={el.path ? el.path : null}
         >
-          {el.name}
+          {el.value === 'delete' ?  (<span>
+               <img src={del} alt={el.value} />
+             </span>): (el.name)}
         </style.CalButton>
       ))}
-      <style.CalButton onClick={clickBtn} colortheme={theme} value="delete">
-        <span>
-          <img src={del} alt="delete" />
-        </span>
-      </style.CalButton>
       <style.Button
         onClick={clickModal}
         className="theme"
@@ -126,57 +145,44 @@ const Button = ({
           />
         ) : null}
       </style.Button>
-      {[7, 8].map(el => (
-        <style.Button onClick={clickBtn} value={el} key={el}>
-          {el}
-        </style.Button>
-      ))}
-      <style.Button onClick={clickBtn} className="nine" value="9">
-        <style.NineButton path={cap} value="9" />9
-      </style.Button>
-      <style.CalButton onClick={clickBtn} colortheme={theme} value="÷">
-        ÷
-      </style.CalButton>
-      <style.EqualButton
-        onClick={clickBtn}
-        colortheme={theme}
-        className="equal"
-        value="equal"
-      >
-        =
-      </style.EqualButton>
-      {[4, 5, 6].map(el => (
-        <style.Button onClick={clickBtn} value={el} key={el}>
-          {el}
-        </style.Button>
-      ))}
-      <style.CalButton onClick={clickBtn} colortheme={theme} value="x">
-        x
-      </style.CalButton>
-      <style.Button onClick={clickBtn} className="one" path={Trophy} value="1">
-        1
-      </style.Button>
-      {[2, 3, '-', 0].map(el =>
-        el === '-' ? (
-          <style.CalButton onClick={clickBtn} colortheme={theme} value="-" key={'minus'}>
-            -
+
+      {buttons.map(el =>
+        el.name === 'nine' || el.name === 'doubleZero' ? (
+          <style.Button
+            onClick={clickBtn}
+            className={el.name}
+            value={el.value}
+            key={el.name}
+          >
+            <style.ImageBtn
+              className={el.name}
+              path={el.path}
+              value={el.value}
+            />
+            {el.value}
+          </style.Button>
+        ) : el.colortheme ? (
+          <style.CalButton
+            onClick={clickBtn}
+            colortheme={el.colortheme}
+            className={el.name}
+            value={el.value}
+            key={el.name}
+          >
+            {el.value}
           </style.CalButton>
         ) : (
-          <style.Button onClick={clickBtn} value={el} key={el}>
-            {el}
+          <style.Button
+            onClick={clickBtn}
+            className={el.name}
+            value={el.value}
+            key={el.name}
+            path={el.path ? el.path : null}
+          >
+            {el.value}
           </style.Button>
         ),
       )}
-      <style.Button onClick={clickBtn} className="doubleZero" value="00">
-        <style.DoubleZeroButton path={band} value="00" />
-        00
-      </style.Button>
-      <style.Button onClick={clickBtn} value="dot">
-        .
-      </style.Button>
-      <style.CalButton onClick={clickBtn} colortheme={theme} value="+">
-        +
-      </style.CalButton>
     </style.ButtonContainer>
   );
 };

@@ -172,7 +172,7 @@ import { stackCalc, postfixScreen } from './fixScreen';
           setScreen(prev => String(prev).slice(0, -1));
           break;
 
-        case 'dot':
+        case '.':
           if (!calc.includes('.')) {
             if (screen === '') {
               setCalc(prev => '0.');
@@ -188,7 +188,7 @@ import { stackCalc, postfixScreen } from './fixScreen';
           }
           break;
 
-        case 'equal':
+        case '=':
           if (oper.includes(lastScreen)) {
             Alert2('error', '완성되지 않은 수식입니다.');
             setScreen(screen);

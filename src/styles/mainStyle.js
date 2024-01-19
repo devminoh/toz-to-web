@@ -13,7 +13,7 @@ export const AppContainer = styled.div`
     props.colortheme === 'aus'
       ? rgba(127, 188, 233, 1)
       : props.colortheme === 'us'
-        ? rgba(134, 167, 228, 1)
+        ? rgba(162, 208, 162, 1)
         : props.colortheme === 'wimbledon'
           ? rgba(117, 63, 189, 1)
           : rgba(232, 105, 56, 1)};
@@ -66,12 +66,11 @@ export const MainContainer = styled.div`
   align-items: center;
   width: 340px;
   height: 573px;
-  /* border: 1px solid red; */
   background-color: ${props =>
     props.colortheme === 'aus'
       ? rgba(127, 188, 233, 1)
       : props.colortheme === 'us'
-        ? rgba(134, 167, 228, 1)
+        ? rgba(162, 208, 162, 1)
         : props.colortheme === 'wimbledon'
           ? rgba(117, 63, 189, 1)
           : rgba(232, 105, 56, 1)};
@@ -81,7 +80,6 @@ export const MainContainer = styled.div`
 export const LogoImg = styled.img`
   height: 35px;
   /* width: 55px; */
-  /* border: 1px solid black; */
 `
 
 //buttons
@@ -182,7 +180,6 @@ export const ACButton = styled(Button)`
 `;
 
 export const CalButton = styled(Button)`
-  /* background-color: rgba(225, 255, 154, 1); */
   background-color: ${props =>
     props.colortheme === 'aus'
       ? rgba(225, 255, 154, 1)
@@ -194,19 +191,16 @@ export const CalButton = styled(Button)`
   span {
     font-size: 35px;
   }
-`;
 
-export const EqualButton = styled(Button)`
-  background-color: ${props =>
-    props.colortheme === 'aus'
-      ? rgba(25, 145, 208, 1)
-      : props.colortheme === 'us'
-        ? rgba(0, 40, 140, 1)
-        : props.colortheme === 'wimbledon'
-          ? rgba(0, 148, 79, 1)
-          : rgba(5, 72, 47, 1)};
-  span {
-    font-size: 35px;
+  &.equal {
+    background-color: ${props =>
+      props.colortheme === 'aus'
+        ? rgba(25, 145, 208, 1)
+        : props.colortheme === 'us'
+          ? rgba(0, 40, 140, 1)
+          : props.colortheme === 'wimbledon'
+            ? rgba(0, 148, 79, 1)
+            : rgba(5, 72, 47, 1)};
   }
 `;
 
@@ -221,26 +215,26 @@ export const ImageBtn = styled.div`
   &:hover {
     opacity: 100%;
   }
-`;
 
-export const NineButton = styled(ImageBtn)`
-  width: 58px;
-  background-size: 100%;
-  left: -12px;
-  top: -17px;
-  width: 74px;
+  &.nine {
+    width: 58px;
+    background-size: 100%;
+    left: -12px;
+    top: -17px;
+    width: 74px;
 
-  &:active {
-    top: -30px;
-    transition: 0.2s;
+    &:active {
+      top: -30px;
+      transition: 0.2s;
+    }
   }
-`;
 
-export const DoubleZeroButton = styled(ImageBtn)`
-  background-size: 94%;
-  left: 0px;
-  top: 2px;
-  width: 61px;
+  &.doubleZero {
+    background-size: 94%;
+    left: 0px;
+    top: 2px;
+    width: 61px;
+  }
 `;
 
 
