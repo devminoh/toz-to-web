@@ -205,7 +205,7 @@ import { stackCalc, postfixScreen } from './fixScreen';
             setScreen(screen);
           }
           // equal이후로 연속계산하기
-          if (lastOper !== '' && operation === 'equal') {
+          if (lastOper !== '' && operation === '=') {
             lastNum.push(prevCalc);
             const lastResult = calculator(
               lastOper,

@@ -55,7 +55,7 @@ const Button = ({
   //테마모달
   const [modalOpen, setModalOpen] = useState(false);
   const clickModal = () => {
-    setModalOpen(!modalOpen);
+    modalOpen ? setModalOpen(false) : setModalOpen(true)
   };
 
   const cap =
