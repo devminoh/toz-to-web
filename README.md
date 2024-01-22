@@ -5,7 +5,8 @@
 
 ## Available Scripts
 
-In the project directory, you can run: `npm start`
+If this is your first time running the project, please press `npm i`.
+Then, In the project directory, you can run: `npm start`
 
 ## 🚧 기능구현
 ### 기본연산
@@ -30,10 +31,9 @@ In the project directory, you can run: `npm start`
 - [x] 빈화면에서 00을 누르면 0으로 표시되고 무시
 - [x] 빈화면에서 연산자 먼저 누르면 alert띄우기
 - [x] 연산자로 끝나는 수식은 alert띄우기
-- [ ] % 다음 delete 눌렀을때 err처리
 ### /0 예외
 - [x] /0 이 들어왔을 경우 alert
-- [ ] /00 이 들어왔을 경우 alert
+- [x] /00 이 들어왔을 경우 alert
 - [x] /0 을 지우고 난 뒤 계산
 ### decimal 예외
 - [x] .을 여러번 눌러도 한번만 인식
