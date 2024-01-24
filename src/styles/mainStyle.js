@@ -8,7 +8,8 @@ export const AppContainer = styled.div`
   position: relative;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  height: 100dvh;
+  width: 100dvw;
   background-color: ${props =>
     props.colortheme === 'aus'
       ? rgba(127, 188, 233, 1)
@@ -45,7 +46,7 @@ export const Line = styled.div`
 export const RowLine = styled.div`
   position: absolute;
   height: 13.33px;
-  width: 1440px;
+  width: inherit;
   background: rgba(255, 255, 255, 0.16);
 
   &.firstLine {

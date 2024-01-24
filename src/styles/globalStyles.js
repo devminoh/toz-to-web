@@ -9,6 +9,9 @@ const GlobalStyles = createGlobalStyle`
     *{
         box-sizing: border-box;
     }
+    body{
+      margin: 0;
+    }
     input, textarea { 
       -moz-user-select: auto;
       -webkit-user-select: auto;
