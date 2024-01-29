@@ -72,15 +72,16 @@ import { stackCalc, postfixScreen } from './fixScreen';
       }
       return;
     } else if (oper.includes(value)) {
-      if(screen === ''){
+      if(screen === '' && operation !== '='){
         Alert2('error', '완성되지 않은 수식입니다.');
         setScreen('')
       }
       // 이전에 누른 버튼이 연산자가 아니거나 현재누른 버튼과 다를때만 계산
       else if (!oper.includes(lastScreen) || lastScreen !== value) {
         //계산 이후로 연산자누르면 연속해서 계산
-        if (screen === '' && operation === 'equal') {
-          setScreen(prev => calc);
+        if (screen === '' && operation === '=') {
+          // setScreen(prev => calc);
+          setScreen(prev => String(calc));
         }
 
         lastOper = value;
