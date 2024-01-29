@@ -34,7 +34,7 @@ import { stackCalc, postfixScreen } from './fixScreen';
             : 'rgba(5, 72, 47, 1)';
 
     const calculator = (operation, prevCalc, calc) => {
-      console.log('calculator')
+      // console.log('calculator')
       const nowSum = parseFloat(calc);
 
       switch (operation) {
@@ -205,18 +205,18 @@ import { stackCalc, postfixScreen } from './fixScreen';
             setScreen(screen);
           }
           // equal이후로 연속계산하기
-          if (lastOper !== '' && operation === '=') {
-            lastNum.push(prevCalc);
-            const lastResult = calculator(
-              lastOper,
-              parseFloat(calc),
-              lastNum[0],
-            )
-              .toFixed(10)
-              .replace(/\.?0+$/, '');
-            setCalc(lastResult);
-            setScreen('');
-          }
+          // if (lastOper !== '' && operation === '=') {
+          //   lastNum.push(prevCalc);
+          //   const lastResult = calculator(
+          //     lastOper,
+          //     parseFloat(calc),
+          //     lastNum[0],
+          //   )
+          //     .toFixed(10)
+          //     .replace(/\.?0+$/, '');
+          //   setCalc(lastResult);
+          //   setScreen('');
+          // }
           setOperation(value);
           break;
       }
