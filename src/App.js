@@ -30,8 +30,8 @@ function App() {
           ? wimLogo
           : rolLogo;
 
-  const periodDetail = JSON.parse(sessionStorage.getItem('period'));
-  console.log(periodDetail)
+  // const periodDetail = JSON.parse(sessionStorage.getItem('period'));
+  // console.log(periodDetail)
   //calc
   const [screen, setScreen] = useState('');
   const [calc, setCalc] = useState('0');

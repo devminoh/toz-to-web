@@ -18,6 +18,7 @@ Then, In the project directory, you can run: `npm start`
 ### 테마적용
 - [x] 네가지의 theme 적용
 - [x] 마지막으로 설정한 theme 저장
+- [x] 기간설정 테마 저장
 
 ### 예외처리
 - [x] clear 버튼 클릭시 C-> AC 로 변경

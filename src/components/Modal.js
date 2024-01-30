@@ -32,6 +32,35 @@ const CustomModal = ({ modalOpen, setModalOpen, setTheme, theme }) => {
     localStorage.setItem('theme', newTheme);
   };
 
+  const handleAutoTheme = () => {
+    const periodDetail = JSON.parse(localStorage.getItem('period'));
+    // console.log(periodDetail);
+
+    const getThemePeriod = (date) => {
+      const current = new Date(date);
+      for(let i = 0 ; i < periodDetail.length; i++){
+        const { startDate, endDate } = periodDetail[i];
+        const parseStart = new Date(startDate);
+        const parseEnd = new Date(endDate);
+
+        if(current >= parseStart && current <= parseEnd){
+          switch(i) {
+            default: return null;
+            case 0: return 'aus';
+            case 1: return 'roland';
+            case 2: return 'wimbledon';
+            case 3: return 'us';
+          }
+        }
+      }
+      return null;
+    }
+    const currentDate = new Date();
+    const themeDate = getThemePeriod(currentDate);
+    // console.log(themeDate);
+    setTheme(themeDate);
+  }
+
   return (
     <>
       {modalOpen && (
@@ -48,7 +77,7 @@ const CustomModal = ({ modalOpen, setModalOpen, setTheme, theme }) => {
               <div>
                 <style.Title>자동설정</style.Title>
                 <style.Content>해당기간 리그가 자동 변경됩니다.</style.Content>
-                <style.AutoTheme />
+                <style.AutoTheme onClick={handleAutoTheme} />
               </div>
               <style.Period onClick={openPeriodModal}>기간설정</style.Period>
               {periodModalOpen && (

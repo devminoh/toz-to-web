@@ -62,7 +62,7 @@ const PeriodModal = ({ isOpen, onRequestClose }) => {
     e.stopPropagation();
    }
 
-   //서버저장
+   //기간 저장
    const handleSave = async () => {
      try {
       onRequestClose();
