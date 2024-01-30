@@ -29,6 +29,9 @@ function App() {
         : theme === 'wimbledon'
           ? wimLogo
           : rolLogo;
+
+  const periodDetail = JSON.parse(sessionStorage.getItem('period'));
+  console.log(periodDetail)
   //calc
   const [screen, setScreen] = useState('');
   const [calc, setCalc] = useState('0');
