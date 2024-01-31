@@ -13,7 +13,7 @@ export const periodModal = {
     left: '0',
   },
   content: {
-    width: '380px',
+    width: '420px',
     height: '500px',
     zIndex: '4',
     position: 'absolute',
@@ -80,14 +80,6 @@ export const Theme = styled.img`
   overflow: hidden;
   border: 1.5px solid rgba(238, 238, 238, 1);
   border-radius: 10px;
-  cursor: pointer;
-
-  &:focus,
-  &:hover {
-    border: 1.5px solid rgba(0, 0, 0, 1);
-    outline: none;
-  }
-  ${({ isSelected }) => isSelected && 'border: 1.5px solid rgba(0, 0, 0, 1);'}
 `;
 
 export const Buttons = styled.div`
@@ -129,4 +121,41 @@ export const StyledDatePicker = styled(DatePicker)`
   gap: 6px;
   border: 1px solid rgba(215, 215, 215, 1);
   cursor: pointer;
+`;
+
+export const Wrap = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 10px;
+
+  > p {
+    margin: 0 20px;
+    font-size: 18px;
+  }
+`;
+
+export const Button = styled.button`
+  margin: 0 10px;
+  font-weight: 700;
+
+  &:hover {
+    
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+`;
+
+export const Month = styled.span`
+  font-weight: 500;
+  padding-left: 10px;
+`;
+
+export const Year = styled.select`
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  background-color: #f0f0f0;
 `;

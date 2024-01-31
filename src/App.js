@@ -30,22 +30,20 @@ function App() {
           ? wimLogo
           : rolLogo;
 
-  // const periodDetail = JSON.parse(sessionStorage.getItem('period'));
-  // console.log(periodDetail)
   //calc
   const [screen, setScreen] = useState('');
   const [calc, setCalc] = useState('0');
   const [prevCalc, setPrevCalc] = useState(0);
   const [operation, setOperation] = useState('');
   
-  console.log(
-    'calc :',
-    calc,
-    'prev :',
-    prevCalc,
-    'op :',
-    operation
-  );
+  // console.log(
+  //   'calc :',
+  //   calc,
+  //   'prev :',
+  //   prevCalc,
+  //   'op :',
+  //   operation
+  // );
 
   return (
     <style.AppContainer colortheme={theme}>

@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import ModalPortal from '../ModalPortal';
 import * as style from '../styles/PeriodStyle';
-import { getMonth, getYear } from 'date-fns';
 
 import aus from '../image/logo/ausopen-logo2.svg';
 import rol from '../image/logo/rolandgarros-logo.svg';
 import us from '../image/logo/usopen-logo.svg';
 import wim from '../image/logo/wimbledon-logo.svg';
 import downButton from '../image/downButton.svg';
+import CustomHeader from './CustomHeader';
 
 const PeriodModal = ({ isOpen, onRequestClose }) => {
   const themes = [
@@ -18,20 +18,32 @@ const PeriodModal = ({ isOpen, onRequestClose }) => {
     { name: 'us', src: us, title: 'US open' },
   ];
 
-  const YEARS = Array.from(
-    { length: getYear(new Date()) + 1 - 2000 },
-    (_, i) => getYear(new Date()) - i,
-  );
-  const MONTHS = [
-    '01', '02', '03', '04', '05', '06', '07', '08', '09', '10', '11', '12'
-  ];
-
   const currentDate = new Date();
   const formattedDate = currentDate.toLocaleDateString('ko-KR', {
     year: '2-digit',
     month: '2-digit',
     day: '2-digit',
   });
+
+  const localSave = JSON.parse(localStorage.getItem('period'));
+
+  const formattedLocalSave = localSave.map(league => {
+    const startDate = new Date(league.startDate);
+    const endDate = new Date(league.endDate);
+    return {
+      ...league,
+      startDate: startDate.toLocaleDateString('ko-KR', {
+        year: '2-digit',
+        month: '2-digit',
+        day: '2-digit',
+      }),
+      endDate: endDate.toLocaleDateString('ko-KR', {
+        year: '2-digit',
+        month: '2-digit',
+        day: '2-digit',
+      }),
+    };
+  })
 
   const [themeStates, setThemeStates] = useState(
     themes.map(() => ({
@@ -57,7 +69,7 @@ const PeriodModal = ({ isOpen, onRequestClose }) => {
       return newStates;
     });
   };
-  // console.log(themeStates);
+  
    const handleModal = e => {
     e.stopPropagation();
    }
@@ -66,7 +78,7 @@ const PeriodModal = ({ isOpen, onRequestClose }) => {
    const handleSave = async () => {
      try {
       onRequestClose();
-      console.log('기간저장 :', themeStates);
+      // console.log('기간저장 :', themeStates);
       localStorage.setItem('period', JSON.stringify(themeStates));
        // 서버에 기간 저장하는 HTTP 요청
       //  const response = await fetch('your-api-endpoint', {
@@ -106,29 +118,74 @@ const PeriodModal = ({ isOpen, onRequestClose }) => {
                   <div>{title}</div>
                   <div className="date">
                     <style.StyledDatePicker
+                      formatWeekDay={nameOfDay => nameOfDay.substring(0, 1)}
                       dateFormat="yy.MM.dd" // 날짜 형태
                       shouldCloseOnSelect // 날짜를 선택하면 datepicker가 자동으로 닫힘
                       minDate={new Date('2000-01-01')} // minDate 이전 날짜 선택 불가
                       selectsStart
-                      // maxDate={new Date()} // maxDate 이후 날짜 선택 불가
                       selected={themeStates[idx].startDate}
                       onChange={handleThemeDateChange(idx, 'startDate')}
-                      buttonImage={downButton}
-                      placeholderText={formattedDate}
+                      placeholderText={
+                        localSave
+                          ? formattedLocalSave[idx].startDate
+                          : formattedDate
+                      }
+                      renderCustomHeader={({
+                        date,
+                        changeMonth,
+                        changeYear,
+                        prevMonthButtonDisabled,
+                        nextMonthButtonDisabled,
+                        decreaseMonth,
+                        increaseMonth,
+                      }) => (
+                        <CustomHeader
+                          date={date}
+                          changeMonth={changeMonth}
+                          changeYear={changeYear}
+                          prevMonthButtonDisabled={prevMonthButtonDisabled}
+                          nextMonthButtonDisabled={nextMonthButtonDisabled}
+                          decreaseMonth={decreaseMonth}
+                          increaseMonth={increaseMonth}
+                        />
+                      )}
                     />
-                    <div className='dash'>~</div>
+                    <div className="dash">~</div>
                     <style.StyledDatePicker
+                      formatWeekDay={nameOfDay => nameOfDay.substring(0, 1)}
                       dateFormat="yy.MM.dd" // 날짜 형태
                       shouldCloseOnSelect // 날짜를 선택하면 datepicker가 자동으로 닫힘
                       minDate={
                         themeStates[idx].endDateMinDate ||
-                        themeStates[idx].startdownDate
+                        themeStates[idx].startDate
                       }
                       selectsEnd
-                      // maxDate={new Date()} // maxDate 이후 날짜 선택 불가
                       selected={themeStates[idx].endDate}
                       onChange={handleThemeDateChange(idx, 'endDate')}
-                      placeholderText={formattedDate}
+                      placeholderText={
+                        localSave
+                          ? formattedLocalSave[idx].endDate
+                          : formattedDate
+                      }
+                      renderCustomHeader={({
+                        date,
+                        changeMonth,
+                        changeYear,
+                        prevMonthButtonDisabled,
+                        nextMonthButtonDisabled,
+                        decreaseMonth,
+                        increaseMonth,
+                      }) => (
+                        <CustomHeader
+                          date={date}
+                          changeMonth={changeMonth}
+                          changeYear={changeYear}
+                          prevMonthButtonDisabled={prevMonthButtonDisabled}
+                          nextMonthButtonDisabled={nextMonthButtonDisabled}
+                          decreaseMonth={decreaseMonth}
+                          increaseMonth={increaseMonth}
+                        />
+                      )}
                     />
                   </div>
                 </style.Right>
