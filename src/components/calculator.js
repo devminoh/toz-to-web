@@ -56,8 +56,11 @@ import { stackCalc, postfixScreen } from './fixScreen';
     const lastScreen = screen[screen.length - 1];
 
     if (number.includes(value)) {
+      if(oper.includes(lastScreen)){
+        setCalc('0');
+      }
       if (calc.length < 10) {
-        if(value === '00'){
+        if(value === '00' || value === '0'){
           if(screen === ''){
             setCalc('0');
             setScreen('0');
@@ -77,7 +80,8 @@ import { stackCalc, postfixScreen } from './fixScreen';
             setCalc(value);
             setScreen(prev => prev.slice(0, -1) + value);
           }
-        } else {
+        }
+        else {
           setCalc(prev =>
             prev === '0' || lastScreen === '' ? value : prev + value,
           );
@@ -127,7 +131,7 @@ import { stackCalc, postfixScreen } from './fixScreen';
           setPrevCalc(parseFloat(calc));
           setOperation(value);
         }
-        setCalc('0');
+        // setCalc('0');
       }
     } else {
       switch (value) {
