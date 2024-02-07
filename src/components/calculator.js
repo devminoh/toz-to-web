@@ -57,14 +57,33 @@ import { stackCalc, postfixScreen } from './fixScreen';
 
     if (number.includes(value)) {
       if (calc.length < 10) {
-        if(calc === '0' && lastScreen === '0'){
-          if(value !== '0'){
-            setCalc(value);
-            setScreen(prev => prev.slice(0,-1) + value);
+        if(value === '00'){
+          if(screen === ''){
+            setCalc('0');
+            setScreen('0');
+          }else if(lastScreen === '0' && calc === '0'){
+            setCalc('0');
+            setScreen(prev => prev);
+          }else if(oper.includes(lastScreen)){
+            setCalc('0');
+            setScreen(prev => prev +'0');
+          }else {
+            setCalc(prev => prev + value);
+            setScreen(prev => prev + value);
           }
-        }else {
-          setCalc(prev => (prev === '0' ? value : prev + value));
-          setScreen(prev => prev + value);
+        }
+        else if (calc === '0' && (lastScreen === '0' || screen === '')) {
+          if (value !== '0') {
+            setCalc(value);
+            setScreen(prev => prev.slice(0, -1) + value);
+          }
+        } else {
+          setCalc(prev =>
+            prev === '0' || lastScreen === '' ? value : prev + value,
+          );
+          setScreen(prev =>
+            prev === '0' || lastScreen === '' ? value : prev + value,
+          );
         }
         setClear('C');
         if (operation === '=') {
@@ -84,7 +103,6 @@ import { stackCalc, postfixScreen } from './fixScreen';
       else if (!oper.includes(lastScreen) || lastScreen !== value) {
         //계산 이후로 연산자누르면 연속해서 계산
         if (screen === '' && operation === '=') {
-          // setScreen(prev => calc);
           setScreen(prev => String(calc));
         }
 
