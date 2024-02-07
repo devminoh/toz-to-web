@@ -57,11 +57,15 @@ import { stackCalc, postfixScreen } from './fixScreen';
 
     if (number.includes(value)) {
       if (calc.length < 10) {
-        if (screen === '' && (value === '00' || value === '0')) {
-          return;
+        if(calc === '0' && lastScreen === '0'){
+          if(value !== '0'){
+            setCalc(value);
+            setScreen(prev => prev.slice(0,-1) + value);
+          }
+        }else {
+          setCalc(prev => (prev === '0' ? value : prev + value));
+          setScreen(prev => prev + value);
         }
-        setCalc(prev => (prev === '0' ? value : prev + value));
-        setScreen(prev => prev + value);
         setClear('C');
         if (operation === '=') {
           setCalc(value === '00' ? '0' : value);

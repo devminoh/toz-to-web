@@ -14,28 +14,23 @@ const CustomHeader = ({
   decreaseMonth,
   increaseMonth,
 }) => {
+  const currentYear = new Date().getFullYear();
   const years = Array.from(
-    { length: getYear(new Date()) + 1 - 2000 },
-    (_, i) => getYear(new Date()) - i,
+    { length: 21 },
+    (_, i) => currentYear - 10 + i,
   );
   const months = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-  const formatDate = d => {
-    const date = new Date(d);
-    const monthIndex = date.getMonth() + 1;
-    const year = date.getFullYear();
-    return `${year}년 ${`0${monthIndex}`.slice(-2)}월`;
-  };
+  // const formatDate = d => {
+  //   const date = new Date(d);
+  //   const monthIndex = date.getMonth() + 1;
+  //   const year = date.getFullYear();
+  //   return `${year}년 ${`0${monthIndex}`.slice(-2)}월`;
+  // };
 
   return (
     <ThemeConsumer>
       {theme => (
         <style.Wrap>
-          <style.Button
-            onClick={decreaseMonth}
-            disabled={prevMonthButtonDisabled}
-          >
-            {'<'}
-          </style.Button>
           <style.Year
             value={getYear(date)}
             onChange={({ target: { value } }) => changeYear(value)}
@@ -46,10 +41,13 @@ const CustomHeader = ({
               </option>
             ))}
           </style.Year>
-          <style.Month
+          <style.Button
+            onClick={decreaseMonth}
+            disabled={prevMonthButtonDisabled}
           >
-            {months[getMonth(date)]}
-          </style.Month>
+            {'<'}
+          </style.Button>
+          <style.Month>{months[getMonth(date)]}</style.Month>
           <style.Button
             onClick={increaseMonth}
             disabled={nextMonthButtonDisabled}

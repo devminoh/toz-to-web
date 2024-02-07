@@ -63,6 +63,9 @@ export const Right = styled.div`
 
     &.date {
       display: flex;
+      label {
+        position: relative;
+      }
     }
     &.dash {
       display: flex;
@@ -127,7 +130,7 @@ export const Wrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 10px;
+  margin: 5px;
 
   > p {
     margin: 0 20px;
@@ -138,6 +141,7 @@ export const Wrap = styled.div`
 export const Button = styled.button`
   margin: 0 10px;
   font-weight: 700;
+
 
   &:hover {
     
@@ -150,12 +154,24 @@ export const Button = styled.button`
 
 export const Month = styled.span`
   font-weight: 500;
-  padding-left: 10px;
+  padding: 0 10px;
 `;
 
 export const Year = styled.select`
   border: none;
+  font-size: 15px;
   font-weight: 500;
   cursor: pointer;
   background-color: #f0f0f0;
+`;
+
+export const Dropdown = styled.img`
+  background: url(${props => props?.path}) no-repeat;
+  color: black;
+  position: absolute;
+  width: 15px;
+  height: 15px;
+  left: 75px;
+  top: 10px;
+  z-index: 1;
 `;

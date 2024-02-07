@@ -117,76 +117,82 @@ const PeriodModal = ({ isOpen, onRequestClose }) => {
                 <style.Right>
                   <div>{title}</div>
                   <div className="date">
-                    <style.StyledDatePicker
-                      formatWeekDay={nameOfDay => nameOfDay.substring(0, 1)}
-                      dateFormat="yy.MM.dd" // 날짜 형태
-                      shouldCloseOnSelect // 날짜를 선택하면 datepicker가 자동으로 닫힘
-                      minDate={new Date('2000-01-01')} // minDate 이전 날짜 선택 불가
-                      selectsStart
-                      selected={themeStates[idx].startDate}
-                      onChange={handleThemeDateChange(idx, 'startDate')}
-                      placeholderText={
-                        localSave
-                          ? formattedLocalSave[idx].startDate
-                          : formattedDate
-                      }
-                      renderCustomHeader={({
-                        date,
-                        changeMonth,
-                        changeYear,
-                        prevMonthButtonDisabled,
-                        nextMonthButtonDisabled,
-                        decreaseMonth,
-                        increaseMonth,
-                      }) => (
-                        <CustomHeader
-                          date={date}
-                          changeMonth={changeMonth}
-                          changeYear={changeYear}
-                          prevMonthButtonDisabled={prevMonthButtonDisabled}
-                          nextMonthButtonDisabled={nextMonthButtonDisabled}
-                          decreaseMonth={decreaseMonth}
-                          increaseMonth={increaseMonth}
-                        />
-                      )}
-                    />
+                    <label>
+                      {/* <style.Dropdown src={downButton} alt="dropdownButton" /> */}
+                      <style.StyledDatePicker
+                        formatWeekDay={nameOfDay => nameOfDay.substring(0, 1)}
+                        dateFormat="yy.MM.dd" // 날짜 형태
+                        shouldCloseOnSelect // 날짜를 선택하면 datepicker가 자동으로 닫힘
+                        minDate={new Date('2000-01-01')} // minDate 이전 날짜 선택 불가
+                        selectsStart
+                        selected={themeStates[idx].startDate}
+                        onChange={handleThemeDateChange(idx, 'startDate')}
+                        placeholderText={
+                          localSave
+                            ? formattedLocalSave[idx].startDate
+                            : formattedDate
+                        }
+                        renderCustomHeader={({
+                          date,
+                          changeMonth,
+                          changeYear,
+                          prevMonthButtonDisabled,
+                          nextMonthButtonDisabled,
+                          decreaseMonth,
+                          increaseMonth,
+                        }) => (
+                          <CustomHeader
+                            date={date}
+                            changeMonth={changeMonth}
+                            changeYear={changeYear}
+                            prevMonthButtonDisabled={prevMonthButtonDisabled}
+                            nextMonthButtonDisabled={nextMonthButtonDisabled}
+                            decreaseMonth={decreaseMonth}
+                            increaseMonth={increaseMonth}
+                          />
+                        )}
+                      />
+                    </label>
                     <div className="dash">~</div>
-                    <style.StyledDatePicker
-                      formatWeekDay={nameOfDay => nameOfDay.substring(0, 1)}
-                      dateFormat="yy.MM.dd" // 날짜 형태
-                      shouldCloseOnSelect // 날짜를 선택하면 datepicker가 자동으로 닫힘
-                      minDate={
-                        themeStates[idx].endDateMinDate ||
-                        themeStates[idx].startDate
-                      }
-                      selectsEnd
-                      selected={themeStates[idx].endDate}
-                      onChange={handleThemeDateChange(idx, 'endDate')}
-                      placeholderText={
-                        localSave
-                          ? formattedLocalSave[idx].endDate
-                          : formattedDate
-                      }
-                      renderCustomHeader={({
-                        date,
-                        changeMonth,
-                        changeYear,
-                        prevMonthButtonDisabled,
-                        nextMonthButtonDisabled,
-                        decreaseMonth,
-                        increaseMonth,
-                      }) => (
-                        <CustomHeader
-                          date={date}
-                          changeMonth={changeMonth}
-                          changeYear={changeYear}
-                          prevMonthButtonDisabled={prevMonthButtonDisabled}
-                          nextMonthButtonDisabled={nextMonthButtonDisabled}
-                          decreaseMonth={decreaseMonth}
-                          increaseMonth={increaseMonth}
-                        />
-                      )}
-                    />
+                    <label>
+                      {/* <style.Dropdown src={downButton} alt="dropdownButton" /> */}
+                      <style.StyledDatePicker
+                        formatWeekDay={nameOfDay => nameOfDay.substring(0, 1)}
+                        dateFormat="yy.MM.dd" // 날짜 형태
+                        shouldCloseOnSelect // 날짜를 선택하면 datepicker가 자동으로 닫힘
+                        minDate={
+                          themeStates[idx].endDateMinDate ||
+                          themeStates[idx].startDate
+                        }
+                        selectsEnd
+                        selected={themeStates[idx].endDate}
+                        onChange={handleThemeDateChange(idx, 'endDate')}
+                        placeholderText={
+                          localSave
+                            ? formattedLocalSave[idx].endDate
+                            : formattedDate
+                        }
+                        renderCustomHeader={({
+                          date,
+                          changeMonth,
+                          changeYear,
+                          prevMonthButtonDisabled,
+                          nextMonthButtonDisabled,
+                          decreaseMonth,
+                          increaseMonth,
+                        }) => (
+                          <CustomHeader
+                            date={date}
+                            changeMonth={changeMonth}
+                            changeYear={changeYear}
+                            prevMonthButtonDisabled={prevMonthButtonDisabled}
+                            nextMonthButtonDisabled={nextMonthButtonDisabled}
+                            decreaseMonth={decreaseMonth}
+                            increaseMonth={increaseMonth}
+                          />
+                        )}
+                      />
+                    </label>
                   </div>
                 </style.Right>
               </style.smallTheme>

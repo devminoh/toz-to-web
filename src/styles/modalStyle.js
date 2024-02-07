@@ -12,7 +12,7 @@ export const customModal = {
   },
   content: {
     width: "360px",
-    height: "180px",
+    height: "300px",
     zIndex: "2",
     position: "absolute",
     top: "50%",
