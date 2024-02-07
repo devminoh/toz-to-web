@@ -23,7 +23,7 @@ import { stackCalc, postfixScreen } from './fixScreen';
   ) => {
     const value =
       e.target.value || e.target.alt || e.target.attributes.value.value;
-    console.log('누른버튼:', value);
+    // console.log('누른버튼:', value);
     const color =
       theme === 'aus'
         ? 'rgba(25, 145, 208, 1)'

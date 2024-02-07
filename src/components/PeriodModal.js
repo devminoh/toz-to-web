@@ -27,7 +27,7 @@ const PeriodModal = ({ isOpen, onRequestClose }) => {
 
   const localSave = JSON.parse(localStorage.getItem('period'));
 
-  const formattedLocalSave = localSave.map(league => {
+  const formattedLocalSave = localSave?.map(league => {
     const startDate = new Date(league.startDate);
     const endDate = new Date(league.endDate);
     return {

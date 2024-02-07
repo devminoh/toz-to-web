@@ -92,6 +92,7 @@ const CustomModal = ({ modalOpen, setModalOpen, setTheme, theme }) => {
               <style.Theme
                 key={name}
                 src={src}
+                alt={name}
                 onClick={() => {
                   changeTheme(name);
                 }}
