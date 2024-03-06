@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer } from 'react';
 import * as style from '../styles/mainStyle';
 import CustomModal from './Modal';
 import { clickCalc } from './calculator';
@@ -54,9 +54,15 @@ const Button = ({
 
   //테마모달
   const [modalOpen, setModalOpen] = useState(false);
+// console.log(modalOpen)
   const clickModal = () => {
-    modalOpen ? setModalOpen(false) : setModalOpen(true)
+    // modalOpen ? setModalOpen(false) : setModalOpen(true)
+    setModalOpen(true);
   };
+  const closeModal = (e) => {
+    e.stopPropagation();
+    setModalOpen(false);
+  }
 
   const cap =
     theme === 'aus'
@@ -122,9 +128,13 @@ const Button = ({
           key={el.value}
           path={el.path ? el.path : null}
         >
-          {el.value === 'delete' ?  (<span>
-               <img src={del} alt={el.value} />
-             </span>): (el.name)}
+          {el.value === 'delete' ? (
+            <span>
+              <img src={del} alt={el.value} />
+            </span>
+          ) : (
+            el.name
+          )}
         </style.CalButton>
       ))}
       <style.Button
@@ -142,6 +152,7 @@ const Button = ({
             setModalOpen={setModalOpen}
             setTheme={setTheme}
             theme={theme}
+            closeModal={closeModal}
           />
         ) : null}
       </style.Button>

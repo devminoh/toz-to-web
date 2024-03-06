@@ -194,6 +194,7 @@ import { stackCalc, postfixScreen } from './fixScreen';
 
         case 'delete':
           const str = String(calc).slice(0, -1);
+          // console.log(str, calc)
           setCalc(prev => (str === '' ? '0' : str));
           setScreen(prev => String(prev).slice(0, -1));
           break;

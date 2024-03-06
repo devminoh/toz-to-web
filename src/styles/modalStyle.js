@@ -2,29 +2,36 @@ import styled from 'styled-components';
 
 export const customModal = {
   overlay: {
-    backgroundColor: " rgba(0, 0, 0, 0.4)",
-    width: "100%",
-    height: "100vh",
-    zIndex: "1",
-    position: "fixed",
-    top: "0",
-    left: "0",
+    backgroundColor: ' rgba(0, 0, 0, 0.4)',
+    width: '100%',
+    height: '100vh',
+    zIndex: '1',
+    position: 'fixed',
+    top: '0',
+    left: '0',
   },
   content: {
-    width: "360px",
-    height: "300px",
-    zIndex: "2",
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-    borderRadius: "10px",
-    boxShadow: "2px 2px 2px rgba(0, 0, 0, 0.25)",
-    backgroundColor: "white",
-    justifyContent: "center",
-    overflow: "auto",
+    width: '360px',
+    height: '400px',
+    zIndex: '2',
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    borderRadius: '10px',
+    boxShadow: '2px 2px 2px rgba(0, 0, 0, 0.25)',
+    backgroundColor: 'white',
+    overflow: 'auto',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'space-between',
+    padding: '20px 0 0 0'
   },
 };
+
+export const TopContainer = styled.div`
+  padding: 0 20px;
+`;
 
 export const Top = styled.div`
   display: flex;
@@ -95,7 +102,40 @@ export const Theme = styled.img`
     border: 1.5px solid rgba(0, 0, 0, 1);
     outline: none;
   }
-  ${({ isSelected }) => isSelected && 'border: 1.5px solid rgba(0, 0, 0, 1);'}
+
+  ${({ isSelected }) =>
+    isSelected &&
+    `
+      background-color: rgba(0, 0, 0, 0.2);
+    `}
+`;
+
+export const Buttons = styled.div`
+  display: flex;
+  width: 100%;
+  button {
+    width: 50%;
+    height: 54px;
+    top: 638px;
+    font-family: Noto Sans CJK KR;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &.cancle {
+      background: rgba(238, 238, 238, 1);
+    }
+    &.save {
+      color: rgba(255, 255, 255, 1);
+      background: rgba(43, 43, 43, 1);
+    }
+  }
 `;
 
 
