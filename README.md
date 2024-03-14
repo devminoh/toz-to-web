@@ -1,70 +1,49 @@
-# Getting Started with Create React App
+# 🧮 테니스테마 계산기 테니쉬계산기
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+테니스를 좋아하는 사람들을 위한 테마계산기입니다.
+우측상단의 탭을 누르시면 테마를 바꿔사용하실 수 있습니다.
 
 ## Available Scripts
 
-In the project directory, you can run:
+If this is your first time running the project, please press `npm i`.
+Then, In the project directory, you can run: `npm start`
 
-### `npm start`
+## 🚧 기능구현
+### 기본연산
+- [x] 두개 이하의 수 연산
+- [x] 두개 이상의 수 연산
+- [x] 우선순위 연산자 계산 (ex. 2+3*4 = 14)
+- [x] 부동소수점 변환
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### 테마적용
+- [x] 네가지의 theme 적용
+- [x] 마지막으로 설정한 theme 저장
+- [x] 기간설정 테마 저장
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### 예외처리
+- [x] clear 버튼 클릭시 C-> AC 로 변경
+- [x] 입력숫자는 10자리로 제한
+- [x] equal 을 누른 뒤 연산자를 눌렀을 때 나온 결과값에 이어서 계산
+- [x] 같은 연산자를 여러번 눌러도 한번만 표시 및 계산
+- [x] 여러 연산자를 연속으로 누르면 마지막 연산자로 계산
+- [ ] 연산 이후 equal을 계속 누르면 마지막 연산이 연속 적용(코드구현은 완료.현재 주석처리)
+- [x] 계산식에 연산자없이 숫자만 있을경우 plus/minus버튼을 누르면 양수여도 +가 앞에 표시되지않음
+- [x] 빈화면에서 0을 누르고 숫자를 누르면 0은 무시
+- [x] 빈화면에서 00을 누르면 0으로 표시되고 무시
+- [x] 빈화면에서 연산자 먼저 누르면 alert띄우기
+- [x] 연산자로 끝나는 수식은 alert띄우기
+### /0 예외
+- [x] /0 이 들어왔을 경우 alert
+- [x] /00 이 들어왔을 경우 alert
+- [x] /0 을 지우고 난 뒤 계산
+### decimal 예외
+- [x] .을 여러번 눌러도 한번만 인식
+- [x] 빈화면일 때 .을 누르면 0.으로 인식
+- [x] 연산자를 누른후 .을 누르면 0.으로 인식
 
-### `npm test`
+# 🔎 Skills
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<br />
 
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+### 🖥 Front-end
+<img src="http://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=000"> <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> <img src="http://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3"> <img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> <img src="https://img.shields.io/badge/styled_components-DB7093?style=for-the-badge&logo=styledcomponents&logoColor=white">
