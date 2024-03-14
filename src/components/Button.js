@@ -8,21 +8,21 @@ import menu from '../image/ic-menu.png';
 import del from '../image/del.svg'
 import ball from '../image/ball.svg';
 
-import ausCap from '../image/Cap/ausCap.svg';
+import ausCap from '../image/cap/ausCap.svg';
 import ausTrophy from '../image/Trophy/ausTrophy.svg';
-import ausBand from '../image/Band/ausBand.svg';
+import ausBand from '../image/band/ausBand.svg';
 
-import usCap from '../image/Cap/usCap.svg';
+import usCap from '../image/cap/usCap.svg';
 import usTrophy from '../image/Trophy/usTrophy.svg';
-import usBand from '../image/Band/usBand.svg';
+import usBand from '../image/band/usBand.svg';
 
-import rolCap from '../image/Cap/rolCap.svg';
+import rolCap from '../image/cap/rolCap.svg';
 import rolTrophy from '../image/Trophy/rolTrophy.svg';
-import rolBand from '../image/Band/rolBand.svg';
+import rolBand from '../image/band/rolBand.svg';
 
-import wimCap from '../image/Cap/wimCap.svg';
+import wimCap from '../image/cap/wimCap.svg';
 import wimTrophy from '../image/Trophy/wimTrophy.svg';
-import wimBand from '../image/Band/wimBand.svg';
+import wimBand from '../image/band/wimBand.svg';
 
 const Button = ({
   calc,
