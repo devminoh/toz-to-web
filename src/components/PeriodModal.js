@@ -7,7 +7,6 @@ import aus from '../image/logo/ausopen-logo2.svg';
 import rol from '../image/logo/rolandgarros-logo.svg';
 import us from '../image/logo/usopen-logo.svg';
 import wim from '../image/logo/wimbledon-logo.svg';
-import downButton from '../image/downButton.svg';
 import CustomHeader from './CustomHeader';
 
 const PeriodModal = ({ isOpen, onRequestClose }) => {

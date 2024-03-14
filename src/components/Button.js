@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from 'react';
+import React, { useState } from 'react';
 import * as style from '../styles/mainStyle';
 import CustomModal from './Modal';
 import { clickCalc } from './calculator';
