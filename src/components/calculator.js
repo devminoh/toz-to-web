@@ -4,7 +4,7 @@ import { stackCalc, postfixScreen } from './fixScreen';
   const number = ['0', '00', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
   const oper = ['÷', 'x', '+', '-'];
   let lastOper = '';
-  let lastNum = [];
+  // let lastNum = [];
 
   export const clickCalc = (
     e,
@@ -92,7 +92,7 @@ import { stackCalc, postfixScreen } from './fixScreen';
         setClear('C');
         if (operation === '=') {
           setCalc(value === '00' ? '0' : value);
-          lastNum = [];
+          // lastNum = [];
         }
       } else {
         Alert2('error', '숫자는 10자리까지만 입력가능합니다.', color);
@@ -142,7 +142,7 @@ import { stackCalc, postfixScreen } from './fixScreen';
           setPrevCalc(0);
           setScreen('');
           setClear('AC');
-          lastNum = [];
+          // lastNum = [];
           lastOper = '';
           break;
         case 'plusminus':
