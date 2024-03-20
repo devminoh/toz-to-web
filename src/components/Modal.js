@@ -76,6 +76,7 @@ const CustomModal = ({ modalOpen, setModalOpen, setTheme, closeModal }) => {
     const themeDate = getThemePeriod(currentDate);
     // console.log(themeDate);
     setTheme(themeDate);
+    setNewTheme(themeDate);
   };
 
   return (
